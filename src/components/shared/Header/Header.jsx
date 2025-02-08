@@ -3,9 +3,17 @@ import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
+import LatestEvent from "./LatestEvent";
+import { useLatestEvent } from "../../../hooks/latestEvent";
+import Notification from "./Notification";
+import useBalance from "../../../hooks/balance";
+import { useSelector } from "react-redux";
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
+  const { user } = useSelector((state) => state.auth);
+  const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
+  const { data } = useLatestEvent();
 
   return (
     <div _ngcontent-htq-c85 _nghost-htq-c82>
@@ -43,11 +51,11 @@ const Header = () => {
                   alt="Exchange"
                   className="img-fluid pr-1"
                 />
-                <b _ngcontent-htq-c82>0.00</b>
+                <b _ngcontent-htq-c82>{balance?.availBalance}</b>
               </p>
               <div _ngcontent-htq-c82>
                 <span _ngcontent-htq-c82 className="mr-1">
-                  <u _ngcontent-htq-c82>Exp: 0</u>
+                  <u _ngcontent-htq-c82>Exp: {balance?.deductedExposure}</u>
                 </span>
                 <div _ngcontent-htq-c82 className="dropdown d-inline-block">
                   <a
@@ -58,7 +66,7 @@ const Header = () => {
                     className="dropdown-toggle"
                   >
                     <u _ngcontent-htq-c82 data-v-3f4cf84d>
-                      demo123
+                      {user}
                     </u>
                   </a>
                   <div _ngcontent-htq-c82 className="dropdown-menu">
@@ -167,136 +175,10 @@ const Header = () => {
                   </form>
                 </div>
               </div>
-              <app-upcoming _ngcontent-htq-c82 _nghost-htq-c79>
-                <marquee
-                  _ngcontent-htq-c79
-                  scrollamount={3}
-                  className="searchClose"
-                >
-                  🏏 𝐈𝐂𝐂 𝐂𝐇𝐀𝐌𝐏𝐈𝐎𝐍𝐒 𝐓𝐑𝐎𝐏𝐇𝐘 𝐂𝐔𝐏 𝐖𝐈𝐍𝐍𝐄𝐑 🏆𝐌𝐀𝐑𝐊𝐄𝐓 𝐒𝐓𝐀𝐑𝐓𝐄𝐃 𝐈𝐍 𝐎𝐔𝐑
-                  𝐄𝐗𝐂𝐇𝐀𝐍𝐆𝐄 🏏 🎾 𝐕𝐈𝐑𝐓𝐔𝐀𝐋 𝐓𝐄𝐍𝐍𝐈𝐒 𝐍𝐎𝐖 𝐀𝐕𝐀𝐈𝐋𝐀𝐁𝐋𝐄 𝐈𝐍 𝐎𝐔𝐑 𝐄𝐗𝐂𝐇𝐀𝐍𝐆𝐄
-                  🎾🏏 𝐎𝐔𝐑 𝐄𝐗𝐂𝐋𝐔𝐒𝐈𝐕𝐄 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐌𝐀𝐑𝐊𝐄𝐓 𝐅𝐎𝐑 (𝐒𝐑𝐋) 𝐈𝐒 𝐍𝐎𝐖 𝐒𝐓𝐀𝐑𝐓𝐄𝐃 𝐈𝐍
-                  𝐎𝐔𝐑 𝐄𝐗𝐂𝐇𝐀𝐍𝐆𝐄 , 𝐃𝐑𝐄𝐀𝐌 𝐁𝐈𝐆 𝐖𝐈𝐍 𝐁𝐈𝐆 💰
-                </marquee>
-              </app-upcoming>
+              <Notification />
             </div>
           </div>
-          <div _ngcontent-htq-c82 _nghost-htq-c80>
-            <div _ngcontent-htq-c80 className="latest-event row">
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/1736377636"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/2378961.png" />
-                  <span _ngcontent-htq-c80>Delhi Election 2025</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33999372"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/4.png" />
-                  <span _ngcontent-htq-c80>India v England</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33994810"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/4.png" />
-                  <span _ngcontent-htq-c80>Sri Lanka v Australia</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33985498"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/4.png" />
-                  <span _ngcontent-htq-c80>Zimbabwe v Ireland</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/34006730"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/2.png" />
-                  <span _ngcontent-htq-c80>Vondrousova v Bencic</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/34007049"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/2.png" />
-                  <span _ngcontent-htq-c80>K Siniakova v Dolehide</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/34002180"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/4.png" />
-                  <span _ngcontent-htq-c80>MI Emirates v Sharjah Warriors</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/34008268"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/4.png" />
-                  <span _ngcontent-htq-c80>
-                    Paarl Royals v Sunrisers Eastern Cape
-                  </span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33926312"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/1.png" />
-                  <span _ngcontent-htq-c80>Liverpool v Tottenham</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33961565"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/1.png" />
-                  <span _ngcontent-htq-c80>Valencia v Barcelona</span>
-                </a>
-              </div>
-              <div _ngcontent-htq-c80 className="latest-event-item">
-                <a
-                  _ngcontent-htq-c80
-                  href="/m/game-detail/33964207"
-                  className="new-launch-text"
-                >
-                  <img _ngcontent-htq-c80 alt="" src="assets/img/1.png" />
-                  <span _ngcontent-htq-c80>Real Sociedad v Osasuna</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          {data && data?.length > 0 && <LatestEvent latestEvent={data} />}
         </div>
       </header>
       {/* <a

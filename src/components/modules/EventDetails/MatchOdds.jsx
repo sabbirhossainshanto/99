@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unknown-property */
 
+import { Status } from "../../../const";
+
 const MatchOdds = ({ matchOdds }) => {
-  console.log(matchOdds);
   return (
     <>
       {matchOdds?.map((games) => {
@@ -45,8 +46,16 @@ const MatchOdds = ({ matchOdds }) => {
                         <div
                           key={runner?.id}
                           _ngcontent-bym-c100
-                          className="table-row"
-                          data-title
+                          className={`table-row ${
+                            runner?.status === Status.SUSPENDED
+                              ? "suspended"
+                              : ""
+                          } `}
+                          data-title={` ${
+                            runner?.status === Status.SUSPENDED
+                              ? "suspended"
+                              : ""
+                          }`}
                         >
                           <div
                             _ngcontent-bym-c100
@@ -68,10 +77,10 @@ const MatchOdds = ({ matchOdds }) => {
                           >
                             <button _ngcontent-bym-c100>
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.back[0]?.price}
+                                {runner?.back[2]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.back[0]?.size}
+                                {runner?.back[2]?.size}
                               </span>
                             </button>
                           </div>
@@ -81,10 +90,10 @@ const MatchOdds = ({ matchOdds }) => {
                           >
                             <button _ngcontent-bym-c100>
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.lay[0]?.price}
+                                {runner?.back?.[1]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.lay[0]?.size}
+                                {runner?.back?.[1]?.size}
                               </span>
                             </button>
                           </div>
@@ -98,10 +107,10 @@ const MatchOdds = ({ matchOdds }) => {
                               data-target="#Placebet"
                             >
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                1.2
+                                {runner?.back?.[0]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                1064.19
+                                {runner?.back?.[0]?.size}
                               </span>
                             </button>
                           </div>
@@ -111,10 +120,10 @@ const MatchOdds = ({ matchOdds }) => {
                           >
                             <button _ngcontent-bym-c100>
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                1.21
+                                {runner?.lay?.[0]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                212350.96
+                                {runner?.lay?.[0]?.size}
                               </span>
                             </button>
                           </div>
@@ -124,10 +133,10 @@ const MatchOdds = ({ matchOdds }) => {
                           >
                             <button _ngcontent-bym-c100>
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                1.22
+                                {runner?.lay?.[1]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                16294.56
+                                {runner?.lay?.[1]?.size}
                               </span>
                             </button>
                           </div>
@@ -137,10 +146,10 @@ const MatchOdds = ({ matchOdds }) => {
                           >
                             <button _ngcontent-bym-c100>
                               <span _ngcontent-bym-c100 className="odd d-block">
-                                1.23
+                                {runner?.lay?.[2]?.price}
                               </span>
                               <span _ngcontent-bym-c100 className="d-block">
-                                57541.9
+                                {runner?.lay?.[2]?.size}
                               </span>
                             </button>
                           </div>
@@ -148,14 +157,14 @@ const MatchOdds = ({ matchOdds }) => {
                       );
                     })}
                   </div>
-                  <div
+                  {/* <div
                     _ngcontent-bym-c100
                     className="table-remark text-right remark"
                   >
                     <marquee _ngcontent-bym-c100>
                       POLITICS : DELHI ELECTION 2025 MARKET BETS STARTED
                     </marquee>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

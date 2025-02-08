@@ -9,7 +9,12 @@ import Fancy from "../../components/modules/EventDetails/Fancy";
 
 const EventDetails = () => {
   const { eventTypeId, eventId } = useParams();
-  const { data } = useGetEventDetailsQuery({ eventTypeId, eventId });
+  const { data } = useGetEventDetailsQuery(
+    { eventTypeId, eventId },
+    {
+      pollingInterval: 1000,
+    }
+  );
 
   const matchOdds = data?.result?.filter(
     (match_odd) =>
@@ -26,8 +31,6 @@ const EventDetails = () => {
       fancy.tabGroupName === "Normal" &&
       fancy?.visible == true
   );
-
-  console.log(matchOdds);
 
   return (
     <div _ngcontent-bym-c104 className="main-content">
@@ -113,8 +116,12 @@ const EventDetails = () => {
                       {matchOdds && matchOdds?.length > 0 && (
                         <MatchOdds matchOdds={matchOdds} />
                       )}
-                      {bookmaker && bookmaker?.length > 0 && <Bookmaker />}
-                      {fancyData && fancyData?.length > 0 && <Fancy />}
+                      {bookmaker && bookmaker?.length > 0 && (
+                        <Bookmaker bookmaker={bookmaker} />
+                      )}
+                      {fancyData && fancyData?.length > 0 && (
+                        <Fancy fancy={fancyData} />
+                      )}
                     </div>
                   </div>
                 </div>
