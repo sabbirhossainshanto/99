@@ -1,6 +1,9 @@
 /* eslint-disable react/no-unknown-property */
 
+import { Link, useLocation } from "react-router-dom";
+
 const Header = () => {
+  const location = useLocation();
   return (
     <ul
       _ngcontent-htq-c46
@@ -9,22 +12,22 @@ const Header = () => {
       aria-label="Tabs"
     >
       <li _ngcontent-htq-c46 className="active nav-item">
-        <a
+        <Link
           _ngcontent-htq-c46
-          href="javascript:void(0);"
+          to="/"
           role="tab"
-          className="nav-link active"
+          className={`nav-link  ${location.pathname === "/" ? "active" : ""}`}
           aria-controls
           aria-selected="true"
           id
         >
           <span _ngcontent-htq-c46>Inplay</span>
-        </a>
+        </Link>
       </li>
       <li _ngcontent-htq-c46 className="nav-item">
-        <a
+        <Link
           _ngcontent-htq-c46
-          href="javascript:void(0);"
+          to="/sports"
           role="tab"
           className="nav-link"
           aria-controls
@@ -32,25 +35,27 @@ const Header = () => {
           id
         >
           <span _ngcontent-htq-c46>Sports</span>
-        </a>
+        </Link>
       </li>
       <li _ngcontent-htq-c46 className="nav-item">
-        <a
+        <Link
           _ngcontent-htq-c46
-          href="javascript:void(0);"
+          to="/casino"
           role="tab"
-          className="nav-link"
+          className={`nav-link  ${
+            location.pathname === "/casino" ? "active" : ""
+          }`}
           aria-controls
           aria-selected="false"
           id
         >
           <span _ngcontent-htq-c46>Casino</span>
-        </a>
+        </Link>
       </li>
       <li _ngcontent-htq-c46 className="nav-item customClass">
-        <a
+        <Link
           _ngcontent-htq-c46
-          href="javascript:void(0);"
+          to="/sports-book"
           role="tab"
           className="nav-link"
           aria-controls
@@ -61,12 +66,12 @@ const Header = () => {
           <div _ngcontent-htq-c97 className="new-tag-menus-sb">
             Sports book
           </div>
-        </a>
+        </Link>
       </li>
       <li _ngcontent-htq-c46 className="nav-item">
-        <a
+        <Link
           _ngcontent-htq-c46
-          href="javascript:void(0);"
+          to="/other"
           role="tab"
           className="nav-link"
           aria-controls
@@ -74,7 +79,7 @@ const Header = () => {
           id
         >
           <span _ngcontent-htq-c46>Others</span>
-        </a>
+        </Link>
       </li>
     </ul>
   );

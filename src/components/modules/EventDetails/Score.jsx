@@ -1,5 +1,16 @@
 /* eslint-disable react/no-unknown-property */
-const Score = () => {
+const Score = ({ score }) => {
+  const {
+    recent,
+    runRate,
+    target,
+    team1Name,
+    team1Score,
+    team2Name,
+    team2Score,
+    commentary,
+  } = score[0] || {};
+
   return (
     <div _ngcontent-bym-c104 id="scoreboard-box">
       <div
@@ -50,19 +61,19 @@ const Score = () => {
                         fontWeight: 600,
                       }}
                     >
-                      ENG
+                      {team1Name}
                     </div>
                     <span className="run" style={{ fontWeight: 600 }}>
-                      197/6&nbsp;
+                      {team1Score}
                     </span>
-                    <span className="over" style={{ fontWeight: 600 }}>
+                    {/* <span className="over" style={{ fontWeight: 600 }}>
                       (38.3)
-                    </span>
+                    </span> */}
                     <br />
                     <span className="over" style={{ fontWeight: 600 }}>
                       CRR :{" "}
                     </span>
-                    5.12
+                    {runRate}
                   </div>
                 </div>
                 <div
@@ -73,14 +84,16 @@ const Score = () => {
                     padding: "5px",
                   }}
                 >
-                  <span className="commantry2">Ball chalu</span>
+                  <span className="commantry2">{target}</span>
                   <p className="target" style={{ fontStyle: "italic" }} />
                   <span className="day">
                     <div className="score-over">
                       <ul>
-                        <li className="six-balls">0</li>
-                        <li className="six-balls">0</li>
-                        <li className="six-balls">0</li>
+                        {recent?.map((r, i) => (
+                          <li key={i} className="six-balls">
+                            {r}
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </span>
@@ -113,16 +126,17 @@ const Score = () => {
                         fontWeight: 600,
                       }}
                     >
-                      IND
+                      {team2Name}
                     </div>
                     <span className="run" style={{ fontWeight: 600 }}>
-                      0/0
+                      {team2Score}
                     </span>
-                    <span className="over" style={{ fontWeight: 600 }}>
+                    {/* <span className="over" style={{ fontWeight: 600 }}>
                       (0.0)
-                    </span>
+                    </span> */}
                     <br />
-                    <span style={{ fontWeight: 600 }}>CRR: </span>0
+                    <span style={{ fontWeight: 600 }}>CRR: </span>
+                    {commentary}
                   </div>
                 </div>
                 <div className="bowler_svg">

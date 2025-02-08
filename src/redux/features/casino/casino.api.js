@@ -11,7 +11,28 @@ export const casinoApi = baseApi.injectEndpoints({
         };
       },
     }),
+    mac88All: builder.query({
+      query: () => {
+        return {
+          url: `${API.mac88All}`,
+          method: "GET",
+        };
+      },
+    }),
+    accessToken: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.accessToken}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetLiveCasinoThumbnailQuery } = casinoApi;
+export const {
+  useGetLiveCasinoThumbnailQuery,
+  useMac88AllQuery,
+  useAccessTokenMutation,
+} = casinoApi;

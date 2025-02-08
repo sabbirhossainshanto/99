@@ -22,6 +22,7 @@ const Tab = () => {
             className={` nav-item ${group === item.group ? "active" : ""}`}
           >
             <a
+              style={{ color: "white" }}
               onClick={() => dispatch(setGroup(item.group))}
               _ngcontent-htq-c46
               role="tab"

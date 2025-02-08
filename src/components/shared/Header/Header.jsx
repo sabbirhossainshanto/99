@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,12 +8,14 @@ import { useLatestEvent } from "../../../hooks/latestEvent";
 import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
 import { useSelector } from "react-redux";
+import Dropdown from "./Dropdown";
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
   const { data } = useLatestEvent();
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div _ngcontent-htq-c85 _nghost-htq-c82>
@@ -60,7 +62,7 @@ const Header = () => {
                 <div _ngcontent-htq-c82 className="dropdown d-inline-block">
                   <a
                     _ngcontent-htq-c82
-                    href="javascript:void(0)"
+                    onClick={() => setShowDropdown((prev) => !prev)}
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                     className="dropdown-toggle"
@@ -69,71 +71,7 @@ const Header = () => {
                       {user}
                     </u>
                   </a>
-                  <div _ngcontent-htq-c82 className="dropdown-menu">
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/home"
-                      className="dropdown-item router-link-exact-active router-link-active"
-                    >
-                      Home
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/reports/account-statement"
-                      className="dropdown-item"
-                    >
-                      Account Statement
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/reports/profit-loss"
-                      className="dropdown-item"
-                    >
-                      Profit Loss Report
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/reports/bet-history"
-                      className="dropdown-item"
-                    >
-                      Bet History
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/reports/unsettled-bets"
-                      className="dropdown-item"
-                    >
-                      Unsetteled Bet
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/change-btn-value"
-                      className="dropdown-item"
-                    >
-                      Set Button Values
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/change-password"
-                      className="dropdown-item"
-                    >
-                      Change Password
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="/m/rules"
-                      className="dropdown-item"
-                    >
-                      Rule
-                    </a>
-                    <a
-                      _ngcontent-htq-c82
-                      href="javascript:void(0)"
-                      className="dropdown-item mt-2 text-danger"
-                    >
-                      <b _ngcontent-htq-c82>Logout</b>
-                    </a>
-                  </div>
+                  <Dropdown showDropdown={showDropdown} />
                 </div>
               </div>
             </div>

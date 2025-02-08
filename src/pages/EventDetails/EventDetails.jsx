@@ -6,8 +6,14 @@ import Score from "../../components/modules/EventDetails/Score";
 import MatchOdds from "../../components/modules/EventDetails/MatchOdds";
 import Bookmaker from "../../components/modules/EventDetails/Bookmaker";
 import Fancy from "../../components/modules/EventDetails/Fancy";
+import { useAccessTokenMutation } from "../../redux/features/casino/casino.api";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTv } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 const EventDetails = () => {
+  const [showIFrame, setShowIFrame] = useState(false);
+  const [getIFrame, { data: IFrame }] = useAccessTokenMutation();
   const { eventTypeId, eventId } = useParams();
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
@@ -31,6 +37,17 @@ const EventDetails = () => {
       fancy.tabGroupName === "Normal" &&
       fancy?.visible == true
   );
+
+  useEffect(() => {
+    if (showIFrame) {
+      const payload = {
+        eventTypeId,
+        eventId,
+        type: "video",
+      };
+      getIFrame(payload);
+    }
+  }, [eventId, eventTypeId, getIFrame, showIFrame]);
 
   return (
     <div _ngcontent-bym-c104 className="main-content">
@@ -90,28 +107,35 @@ const EventDetails = () => {
                   >
                     <div _ngcontent-bym-c104 className="match-title">
                       <span _ngcontent-bym-c104 className="match-name">
-                        India v England
+                        {data?.result?.[0]?.eventName}
                       </span>
                       <span _ngcontent-bym-c104 className="float-right">
-                        <span _ngcontent-bym-c104>06/02/2025 13:30:00</span>
+                        <span _ngcontent-bym-c104>
+                          {" "}
+                          {data?.result?.[0]?.openDate}
+                        </span>
                       </span>
                     </div>
                     <div
                       _ngcontent-bym-c104
                       id="collapseBasic"
                       aria-hidden="true"
-                      className="collapse"
-                      style={{ display: "none" }}
+                      className={`collapse  ${
+                        showIFrame && IFrame?.result?.url ? "show" : ""
+                      }`}
                     >
                       <iframe
                         _ngcontent-bym-c104
                         id="tvStr"
                         className="LiveStream-video-col"
-                        src
+                        src={IFrame?.result?.url}
                       />
                     </div>
                     <div _ngcontent-bym-c104>
-                      <Score />
+                      {eventTypeId == 4 && (
+                        <Score score={data?.result?.[0]?.score} />
+                      )}
+
                       <div _ngcontent-bym-c104 className="sr-widget-1" />
                       {matchOdds && matchOdds?.length > 0 && (
                         <MatchOdds matchOdds={matchOdds} />
@@ -174,7 +198,12 @@ const EventDetails = () => {
               aria-controls="collapseBasic"
               aria-expanded="false"
             >
-              <i _ngcontent-bym-c104 className="fas fa-tv" />
+              <FontAwesomeIcon
+                onClick={() => setShowIFrame((prev) => !prev)}
+                style={{ color: "white", fontSize: "10px" }}
+                icon={faTv}
+                className="mr-1"
+              />
             </a>
           </p>
         </div>
