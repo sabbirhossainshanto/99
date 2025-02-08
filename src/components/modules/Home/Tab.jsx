@@ -1,6 +1,12 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useDispatch, useSelector } from "react-redux";
+import { setGroup } from "../../../redux/features/global/globalSlice";
+import { homeTab } from "../../../static/group";
+
 const Tab = () => {
+  const { group } = useSelector((state) => state.global);
+  const dispatch = useDispatch();
   return (
     <ul
       _ngcontent-htq-c46
@@ -8,331 +14,37 @@ const Tab = () => {
       className="nav nav-tabs game-nav-bar"
       aria-label="Tabs"
     >
-      <li _ngcontent-htq-c46 className="active nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link active"
-          aria-controls
-          aria-selected="true"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/4.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Cricket<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/1.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Football<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/2.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Tennis<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/7.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Horse Racing<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/4339.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Greyhound Racing
-            <em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/99990.png" />
-          </div>
-          <div _ngcontent-htq-c97 className="new-tag-menus">
-            Binary<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/99994.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Kabaddi<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/2378961.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Politics<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/7522.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Basketball<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/7511.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Baseball<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/20.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Table Tennis<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/998917.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Volleyball<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/7524.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Ice Hockey<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/5.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Rugby<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/26420387.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Mixed Martial Arts
-            <em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/3503.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Darts<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
-      <li _ngcontent-htq-c46 className="nav-item">
-        <a
-          _ngcontent-htq-c46
-          href="javascript:void(0);"
-          role="tab"
-          className="nav-link"
-          aria-controls
-          aria-selected="false"
-          id
-        >
-          <span _ngcontent-htq-c46 />
-          <div _ngcontent-htq-c97>
-            <img _ngcontent-htq-c97 alt="" src="assets/img/29.png" />
-          </div>
-          <div _ngcontent-htq-c97>
-            Futsal<em _ngcontent-htq-c97>new</em>
-          </div>
-        </a>
-      </li>
+      {homeTab.map((item) => {
+        return (
+          <li
+            key={item.id}
+            _ngcontent-htq-c46
+            className={` nav-item ${group === item.group ? "active" : ""}`}
+          >
+            <a
+              onClick={() => dispatch(setGroup(item.group))}
+              _ngcontent-htq-c46
+              role="tab"
+              className={`nav-link ${group === item.group ? "active" : ""}`}
+              aria-controls
+              aria-selected="true"
+              id
+            >
+              <span _ngcontent-htq-c46 />
+              <div _ngcontent-htq-c97>
+                <img _ngcontent-htq-c97 alt="" src={item.image} />
+              </div>
+              <div
+                _ngcontent-htq-c97
+                className={item?.id === 6 ? "new-tag-menus" : ""}
+              >
+                {item.name}
+                <em _ngcontent-htq-c97>new</em>
+              </div>
+            </a>
+          </li>
+        );
+      })}
     </ul>
   );
 };

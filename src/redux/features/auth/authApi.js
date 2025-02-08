@@ -12,7 +12,16 @@ export const authApi = baseApi.injectEndpoints({
         };
       },
     }),
+    login: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.login}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
-export const { useAuthMutation } = authApi;
+export const { useAuthMutation, useLoginMutation } = authApi;

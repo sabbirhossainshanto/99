@@ -1,0 +1,170 @@
+/* eslint-disable react/no-unknown-property */
+
+const MatchOdds = ({ matchOdds }) => {
+  console.log(matchOdds);
+  return (
+    <>
+      {matchOdds?.map((games) => {
+        return (
+          <div key={games?.id} _ngcontent-bym-c104>
+            <div _ngcontent-bym-c104 _nghost-bym-c100>
+              <div _ngcontent-bym-c100>
+                <div _ngcontent-bym-c100 className="market-title mt-1">
+                  {games?.name?.toUpperCase()}
+                  <button _ngcontent-bym-c100 className="btn-cashout">
+                    cashout
+                  </button>
+                  <p _ngcontent-bym-c100 className="float-right mb-0">
+                    <i _ngcontent-bym-c100 className="fas fa-info-circle" />
+                  </p>
+                </div>
+                <div _ngcontent-bym-c100 className="main-market">
+                  <div _ngcontent-bym-c100 className="table-header">
+                    <div
+                      _ngcontent-bym-c100
+                      className="float-left country-name box-6 min-max"
+                    >
+                      <b _ngcontent-bym-c100>Min:100 Max:100000</b>
+                    </div>
+                    <div
+                      _ngcontent-bym-c100
+                      className="back box-1 float-left text-center"
+                    >
+                      <b _ngcontent-bym-c100>BACK</b>
+                    </div>
+                    <div
+                      _ngcontent-bym-c100
+                      className="lay box-1 float-left text-center"
+                    >
+                      <b _ngcontent-bym-c100>LAY</b>
+                    </div>
+                  </div>
+                  <div _ngcontent-bym-c100 className="table-body">
+                    {games?.runners?.map((runner) => {
+                      return (
+                        <div
+                          key={runner?.id}
+                          _ngcontent-bym-c100
+                          className="table-row"
+                          data-title
+                        >
+                          <div
+                            _ngcontent-bym-c100
+                            className="float-left country-name box-4"
+                          >
+                            <span _ngcontent-bym-c100 className="team-name">
+                              <b _ngcontent-bym-c100>{runner?.name}</b>
+                            </span>
+                            <p _ngcontent-bym-c100 className="mob-expo-cs">
+                              <span
+                                _ngcontent-bym-c100
+                                className="float-left"
+                              />
+                            </p>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="back-1 back1 blink box-1 float-left hidden-portrait text-center"
+                          >
+                            <button _ngcontent-bym-c100>
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                {runner?.back[0]?.price}
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                {runner?.back[0]?.size}
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="back-2 back2 blink box-1 float-left hidden-portrait text-center"
+                          >
+                            <button _ngcontent-bym-c100>
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                {runner?.lay[0]?.price}
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                {runner?.lay[0]?.size}
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="back blink box-1 float-left lock text-center"
+                          >
+                            <button
+                              _ngcontent-bym-c100
+                              data-toggle="modal"
+                              data-target="#Placebet"
+                            >
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                1.2
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                1064.19
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="blink box-1 float-left lay text-center"
+                          >
+                            <button _ngcontent-bym-c100>
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                1.21
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                212350.96
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="blink box-1 float-left hidden-portrait lay-2 text-center"
+                          >
+                            <button _ngcontent-bym-c100>
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                1.22
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                16294.56
+                              </span>
+                            </button>
+                          </div>
+                          <div
+                            _ngcontent-bym-c100
+                            className="blink box-1 float-left hidden-portrait lay-1 text-center"
+                          >
+                            <button _ngcontent-bym-c100>
+                              <span _ngcontent-bym-c100 className="odd d-block">
+                                1.23
+                              </span>
+                              <span _ngcontent-bym-c100 className="d-block">
+                                57541.9
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <div
+                    _ngcontent-bym-c100
+                    className="table-remark text-right remark"
+                  >
+                    <marquee _ngcontent-bym-c100>
+                      POLITICS : DELHI ELECTION 2025 MARKET BETS STARTED
+                    </marquee>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div _ngcontent-bym-c104 />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+
+export default MatchOdds;

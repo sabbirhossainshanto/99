@@ -30,6 +30,17 @@ export const eventsApi = baseApi.injectEndpoints({
           },
         };
       },
+      transformResponse: (data) => {
+        return handleDecryptData(JSON.stringify(data));
+      },
+    }),
+    mac88: builder.query({
+      query: () => {
+        return {
+          url: `${API.mac88}`,
+          method: "GET",
+        };
+      },
     }),
     order: builder.mutation({
       query: (payload) => {
@@ -43,5 +54,9 @@ export const eventsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetEventDetailsQuery, useOrderMutation, useGroupQuery } =
-  eventsApi;
+export const {
+  useGetEventDetailsQuery,
+  useOrderMutation,
+  useGroupQuery,
+  useMac88Query,
+} = eventsApi;

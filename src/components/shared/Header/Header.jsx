@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
-
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
   const { logo } = useContext(ApiContext);
@@ -14,19 +16,24 @@ const Header = () => {
             className="row row5 pt-1 pb-1 align-items-center"
           >
             <div _ngcontent-htq-c82 className="logo col-6">
-              <a
+              <Link
                 _ngcontent-htq-c82
-                href="/m/home"
+                to="/"
                 className="router-link-exact-active router-link-active"
               >
-                <i _ngcontent-htq-c82 className="fas fa-home mr-1" />
+                <FontAwesomeIcon
+                  style={{ color: "white" }}
+                  icon={faHome}
+                  className="mr-1"
+                />
+                {/* <i _ngcontent-htq-c82 className="fas fa-home mr-1" /> */}
                 <img
                   _ngcontent-htq-c82
                   alt="Exchange"
                   className="img-fluid logo"
                   src={logo}
                 />
-              </a>
+              </Link>
             </div>
             <div _ngcontent-htq-c82 className="col-6 text-right bal-expo">
               <p _ngcontent-htq-c82 className="mb-0">
@@ -140,7 +147,12 @@ const Header = () => {
                     href="javascript:void(0)"
                     className="search_icon"
                   >
-                    <i _ngcontent-htq-c82 className="fas fa-search" />
+                    <FontAwesomeIcon
+                      style={{ color: "black" }}
+                      icon={faSearch}
+                      size="20"
+                    />
+                    {/* <i _ngcontent-htq-c82 className="fas fa-search" /> */}
                   </a>
                 </div>
                 <div _ngcontent-htq-c82 className="search-col d-none">
