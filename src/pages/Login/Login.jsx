@@ -141,6 +141,19 @@ const Login = () => {
                 <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
               </button>
             </div>
+            {Settings.registration && (
+              <div _ngcontent-wjb-c42 className="form-group mt-1">
+                <button
+                  _ngcontent-wjb-c42
+                  type="button"
+                  className="btn btn-primary btn-block"
+                >
+                  Registration
+                  <FontAwesomeIcon icon={faSignInAlt} className="ml-2" />
+                </button>
+              </div>
+            )}
+
             <small _ngcontent-wjb-c42 className="recaptchaTerms">
               This site is protected by reCAPTCHA and the Google{" "}
               <a _ngcontent-wjb-c42>Privacy Policy </a>

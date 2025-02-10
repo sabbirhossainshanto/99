@@ -19,6 +19,15 @@ export const casinoApi = baseApi.injectEndpoints({
         };
       },
     }),
+    liveCasinoIframe: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.liveCasinoIframe}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
     accessToken: builder.mutation({
       query: (payload) => {
         return {
@@ -34,5 +43,6 @@ export const casinoApi = baseApi.injectEndpoints({
 export const {
   useGetLiveCasinoThumbnailQuery,
   useMac88AllQuery,
+  useLiveCasinoIframeMutation,
   useAccessTokenMutation,
 } = casinoApi;

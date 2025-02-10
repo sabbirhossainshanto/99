@@ -31,7 +31,7 @@ export const router = createBrowserRouter(
       element: <Login />,
     },
     {
-      path: "/casino/:eventId/:eventTypeId",
+      path: "/casino/:name/:gameId",
       element: <CasinoIFrame />,
     },
   ],

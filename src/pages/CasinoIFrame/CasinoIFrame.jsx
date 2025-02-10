@@ -1,23 +1,30 @@
 /* eslint-disable react/no-unknown-property */
 
 import { useNavigate, useParams } from "react-router-dom";
-import { useAccessTokenMutation } from "../../redux/features/casino/casino.api";
+import { useLiveCasinoIframeMutation } from "../../redux/features/casino/casino.api";
 import { useContext, useEffect } from "react";
 import { ApiContext } from "../../context/ApiProvider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHome, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
+import { Settings } from "../../api";
 
 const CasinoIFrame = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { logo } = useContext(ApiContext);
-  const [handleGetIFrame, { data }] = useAccessTokenMutation();
-  const { eventTypeId, eventId } = useParams();
+  const [handleGetIFrame, { data }] = useLiveCasinoIframeMutation();
+  const { gameId } = useParams();
 
   useEffect(() => {
-    handleGetIFrame({ eventTypeId, eventId });
-  }, [eventTypeId, eventId, handleGetIFrame]);
+    const payload = {
+      gameId: gameId,
+      isHome: false,
+      mobileOnly: true,
+      casinoCurrency: Settings.casinoCurrency,
+    };
+    handleGetIFrame(payload);
+  }, [handleGetIFrame, gameId]);
 
   return (
     <div _nghost-swn-c87="">
