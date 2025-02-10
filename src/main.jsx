@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+// import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { RouterProvider } from "react-router-dom";
@@ -12,16 +12,16 @@ import { Toaster } from "react-hot-toast";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <ApiProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
-          </QueryClientProvider>
-        </PersistGate>
-      </Provider>
-    </ApiProvider>
+  // <StrictMode>
+  <ApiProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </PersistGate>
+    </Provider>
     <Toaster />
-  </StrictMode>
+  </ApiProvider>
+  // </StrictMode>
 );

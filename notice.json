@@ -17,7 +17,7 @@
       "deposit": true,
       "withdraw": true,
       "disabledDevtool": false,
-      "casinoCurrency": "AED",
+      "casinoCurrency": "INR",
       "balanceApiLoop": true,
       "baseUrl": "",
       "betFairCashOut": true,

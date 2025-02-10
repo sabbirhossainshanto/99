@@ -23,6 +23,7 @@ const CasinoIFrame = () => {
       mobileOnly: true,
       casinoCurrency: Settings.casinoCurrency,
     };
+
     handleGetIFrame(payload);
   }, [handleGetIFrame, gameId]);
 

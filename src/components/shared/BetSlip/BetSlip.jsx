@@ -146,7 +146,10 @@ const BetSlip = () => {
   return (
     <div _ngcontent-ukj-c100="">
       <div _ngcontent-ukj-c100="" _nghost-ukj-c63="">
-        <div _ngcontent-ukj-c63="" class="new-betslip back">
+        <div
+          _ngcontent-ukj-c63=""
+          class={`new-betslip ${placeBetValues?.back ? "back" : "lay"}`}
+        >
           <div _ngcontent-ukj-c63="" id="goto-1.238886397-1006">
             {loading && (
               <div
