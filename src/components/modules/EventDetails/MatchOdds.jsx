@@ -1,11 +1,106 @@
 /* eslint-disable react/no-unknown-property */
 
-import { useState } from "react";
 import { Status } from "../../../const";
 import BetSlip from "../../shared/BetSlip/BetSlip";
+import { useExposure } from "../../../hooks/exposure";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {
+  setPlaceBetValues,
+  setRunnerId,
+} from "../../../redux/features/events/eventSlice";
 
 const MatchOdds = ({ matchOdds }) => {
-  const [runnerId, setRunnerId] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { runnerId } = useSelector((state) => state.event);
+  const { token } = useSelector((state) => state.auth);
+  const { data: exposure } = useExposure();
+
+  const handleBetSlip = (betType, games, runner, price) => {
+    if (token) {
+      let selectionId;
+      let runnerId;
+      let eventTypeId;
+      if (!price) {
+        return;
+      }
+
+      let pnlBySelection;
+      const updatedPnl = [];
+
+      if (exposure?.pnlBySelection) {
+        const obj = exposure?.pnlBySelection;
+        pnlBySelection = Object?.values(obj);
+      }
+
+      if (games?.btype == "FANCY") {
+        selectionId = games?.id;
+        runnerId = games?.id;
+        eventTypeId = games?.eventTypeId;
+        const pnl = pnlBySelection?.find((p) => p?.RunnerId === games?.id);
+        if (pnl) {
+          updatedPnl.push(pnl?.pnl);
+        }
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        selectionId = runner?.id;
+        runnerId = games.runners.map((runner) => runner.id);
+        eventTypeId = games?.eventTypeId;
+        games?.runners?.forEach((runner) => {
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === runner?.id);
+          if (pnl) {
+            updatedPnl.push(pnl?.pnl);
+          }
+        });
+      } else {
+        selectionId = runner?.selectionId;
+        eventTypeId = games?.marketId;
+        games?.runners?.forEach((runner) => {
+          const pnl = pnlBySelection?.find(
+            (p) => p?.RunnerId === runner?.selectionId
+          );
+          if (pnl) {
+            updatedPnl.push(pnl?.pnl);
+          }
+        });
+      }
+
+      const betData = {
+        price,
+        side: betType === "back" ? 0 : 1,
+        selectionId,
+        btype: games?.btype,
+        eventTypeId,
+        betDelay: games?.betDelay,
+        marketId: games?.id,
+        lay: betType === "lay",
+        back: betType === "back",
+        selectedBetName: runner?.name,
+        name: games.runners.map((runner) => runner.name),
+        runnerId,
+        isWeak: games?.isWeak,
+        maxLiabilityPerMarket: games?.maxLiabilityPerMarket,
+        isBettable: games?.isBettable,
+        maxLiabilityPerBet: games?.maxLiabilityPerBet,
+        pnl: updatedPnl,
+        marketName: games?.name,
+        eventId: games?.eventId,
+        totalSize: 0,
+      };
+      if (games?.btype == "FANCY") {
+        dispatch(setRunnerId(games?.id));
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        dispatch(setRunnerId(runner?.id));
+      } else {
+        dispatch(setRunnerId(runner?.selectionId));
+      }
+
+      dispatch(setPlaceBetValues(betData));
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <>
       {matchOdds?.map((games) => {
@@ -76,7 +171,14 @@ const MatchOdds = ({ matchOdds }) => {
                           </div>
 
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "back",
+                                games,
+                                runner,
+                                runner?.back[2]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="back-1 back1 blink box-1 float-left hidden-portrait text-center"
                           >
@@ -90,7 +192,14 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "back",
+                                games,
+                                runner,
+                                runner?.back[1]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="back-2 back2 blink box-1 float-left hidden-portrait text-center"
                           >
@@ -104,7 +213,14 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "back",
+                                games,
+                                runner,
+                                runner?.back[1]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="back blink box-1 float-left lock text-center"
                           >
@@ -122,7 +238,14 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "lay",
+                                games,
+                                runner,
+                                runner?.lay[0]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="blink box-1 float-left lay text-center"
                           >
@@ -136,7 +259,14 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "lay",
+                                games,
+                                runner,
+                                runner?.lay?.[1]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="blink box-1 float-left hidden-portrait lay-2 text-center"
                           >
@@ -150,7 +280,14 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
-                            onClick={() => setRunnerId(runner?.id)}
+                            onClick={() =>
+                              handleBetSlip(
+                                "lay",
+                                games,
+                                runner,
+                                runner?.lay?.[2]?.price
+                              )
+                            }
                             _ngcontent-bym-c100
                             className="blink box-1 float-left hidden-portrait lay-1 text-center"
                           >
@@ -163,9 +300,7 @@ const MatchOdds = ({ matchOdds }) => {
                               </span>
                             </button>
                           </div>
-                          {runnerId === runner?.id && (
-                            <BetSlip setRunnerId={setRunnerId} />
-                          )}
+                          {runnerId === runner?.id && <BetSlip />}
                         </div>
                       );
                     })}

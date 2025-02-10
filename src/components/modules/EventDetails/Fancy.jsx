@@ -1,11 +1,106 @@
 /* eslint-disable react/no-unknown-property */
 
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Status } from "../../../const";
 import BetSlip from "../../shared/BetSlip/BetSlip";
+import { useDispatch, useSelector } from "react-redux";
+import { useExposure } from "../../../hooks/exposure";
+import {
+  setPlaceBetValues,
+  setRunnerId,
+} from "../../../redux/features/events/eventSlice";
 
 const Fancy = ({ fancy }) => {
-  const [runnerId, setRunnerId] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { runnerId } = useSelector((state) => state.event);
+  const { token } = useSelector((state) => state.auth);
+  const { data: exposure } = useExposure();
+
+  const handleBetSlip = (betType, games, runner, price) => {
+    if (token) {
+      let selectionId;
+      let runnerId;
+      let eventTypeId;
+      if (!price) {
+        return;
+      }
+
+      let pnlBySelection;
+      const updatedPnl = [];
+
+      if (exposure?.pnlBySelection) {
+        const obj = exposure?.pnlBySelection;
+        pnlBySelection = Object?.values(obj);
+      }
+
+      if (games?.btype == "FANCY") {
+        selectionId = games?.id;
+        runnerId = games?.id;
+        eventTypeId = games?.eventTypeId;
+        const pnl = pnlBySelection?.find((p) => p?.RunnerId === games?.id);
+        if (pnl) {
+          updatedPnl.push(pnl?.pnl);
+        }
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        selectionId = runner?.id;
+        runnerId = games.runners.map((runner) => runner.id);
+        eventTypeId = games?.eventTypeId;
+        games?.runners?.forEach((runner) => {
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === runner?.id);
+          if (pnl) {
+            updatedPnl.push(pnl?.pnl);
+          }
+        });
+      } else {
+        selectionId = runner?.selectionId;
+        eventTypeId = games?.marketId;
+        games?.runners?.forEach((runner) => {
+          const pnl = pnlBySelection?.find(
+            (p) => p?.RunnerId === runner?.selectionId
+          );
+          if (pnl) {
+            updatedPnl.push(pnl?.pnl);
+          }
+        });
+      }
+
+      const betData = {
+        price,
+        side: betType === "back" ? 0 : 1,
+        selectionId,
+        btype: games?.btype,
+        eventTypeId,
+        betDelay: games?.betDelay,
+        marketId: games?.id,
+        lay: betType === "lay",
+        back: betType === "back",
+        selectedBetName: runner?.name,
+        name: games.runners.map((runner) => runner.name),
+        runnerId,
+        isWeak: games?.isWeak,
+        maxLiabilityPerMarket: games?.maxLiabilityPerMarket,
+        isBettable: games?.isBettable,
+        maxLiabilityPerBet: games?.maxLiabilityPerBet,
+        pnl: updatedPnl,
+        marketName: games?.name,
+        eventId: games?.eventId,
+        totalSize: 0,
+      };
+      if (games?.btype == "FANCY") {
+        dispatch(setRunnerId(games?.id));
+      } else if (games?.btype && games?.btype !== "FANCY") {
+        dispatch(setRunnerId(runner?.id));
+      } else {
+        dispatch(setRunnerId(runner?.selectionId));
+      }
+
+      dispatch(setPlaceBetValues(betData));
+    } else {
+      navigate("/login");
+    }
+  };
+
   return (
     <div
       _ngcontent-bym-c104
@@ -306,7 +401,13 @@ const Fancy = ({ fancy }) => {
                                                 >
                                                   <button
                                                     onClick={() =>
-                                                      setRunnerId(games?.id)
+                                                      handleBetSlip(
+                                                        "lay",
+                                                        games,
+                                                        games?.runners?.[0],
+                                                        games?.runners?.[0]
+                                                          ?.lay?.[0]?.line
+                                                      )
                                                     }
                                                     _ngcontent-bym-c102
                                                   >
@@ -336,7 +437,13 @@ const Fancy = ({ fancy }) => {
                                                 >
                                                   <button
                                                     onClick={() =>
-                                                      setRunnerId(games?.id)
+                                                      handleBetSlip(
+                                                        "back",
+                                                        games,
+                                                        games?.runners?.[0],
+                                                        games?.runners?.[0]
+                                                          ?.back?.[0]?.line
+                                                      )
                                                     }
                                                     _ngcontent-bym-c102
                                                   >

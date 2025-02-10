@@ -1,14 +1,16 @@
-import { setPlaceBetValues } from "../redux/features/events/eventSlice";
-import { setShowLoginModal } from "../redux/features/stateSlice";
+import {
+  setPlaceBetValues,
+  setRunnerId,
+} from "../redux/features/events/eventSlice";
 
 export const handleBetSlip = (
-  setRunnerId,
   betType,
   games,
   runner,
   exposer,
   dispatch,
-  token
+  token,
+  navigate
 ) => {
   if (token) {
     let selectionId;
@@ -95,15 +97,15 @@ export const handleBetSlip = (
       totalSize: 0,
     };
     if (games?.btype == "FANCY") {
-      setRunnerId(games?.id);
+      dispatch(setRunnerId(games?.id));
     } else if (games?.btype && games?.btype !== "FANCY") {
-      setRunnerId(runner?.id);
+      dispatch(setRunnerId(runner?.id));
     } else {
-      setRunnerId(runner?.selectionId);
+      dispatch(setRunnerId(runner?.selectionId));
     }
 
     dispatch(setPlaceBetValues(betData));
   } else {
-    dispatch(setShowLoginModal(true));
+    navigate("/login");
   }
 };
