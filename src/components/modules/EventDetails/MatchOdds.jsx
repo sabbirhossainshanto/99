@@ -218,7 +218,7 @@ const MatchOdds = ({ matchOdds }) => {
                                 "back",
                                 games,
                                 runner,
-                                runner?.back[1]?.price
+                                runner?.back[0]?.price
                               )
                             }
                             _ngcontent-bym-c100
