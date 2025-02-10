@@ -129,10 +129,11 @@ const EventDetails = () => {
                         id="tvStr"
                         className="LiveStream-video-col"
                         src={IFrame?.result?.url}
+                        style={{ width: "100%", height: "100%" }}
                       />
                     </div>
                     <div _ngcontent-bym-c104>
-                      {eventTypeId == 4 && (
+                      {eventTypeId == 4 && data?.result?.[0]?.score && (
                         <Score score={data?.result?.[0]?.score} />
                       )}
 

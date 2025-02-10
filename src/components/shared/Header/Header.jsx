@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,13 +9,19 @@ import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
+import useCloseModalClickOutside from "../../../hooks/closeModal";
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
+  const dropdownRef = useRef();
   const { user } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
   const { data } = useLatestEvent();
   const [showDropdown, setShowDropdown] = useState(false);
+
+  useCloseModalClickOutside(dropdownRef, () => {
+    setShowDropdown(false);
+  });
 
   return (
     <div _ngcontent-htq-c85 _nghost-htq-c82>
@@ -59,7 +65,11 @@ const Header = () => {
                 <span _ngcontent-htq-c82 className="mr-1">
                   <u _ngcontent-htq-c82>Exp: {balance?.deductedExposure}</u>
                 </span>
-                <div _ngcontent-htq-c82 className="dropdown d-inline-block">
+                <div
+                  ref={dropdownRef}
+                  _ngcontent-htq-c82
+                  className="dropdown d-inline-block"
+                >
                   <a
                     _ngcontent-htq-c82
                     onClick={() => setShowDropdown((prev) => !prev)}
