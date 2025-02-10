@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useState } from "react";
 import { Status } from "../../../const";
+import BetSlip from "../../shared/BetSlip/BetSlip";
 
 const Bookmaker = ({ bookmaker }) => {
+  const [runnerId, setRunnerId] = useState(null);
   return (
     <>
       {bookmaker?.map((games) => {
@@ -74,6 +77,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </p>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="back-1 back1 box-1 float-left text-center"
                               >
@@ -90,6 +94,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </button>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="back-2 back2 box-1 float-left text-center"
                               >
@@ -106,6 +111,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </button>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="back box-1 float-left lock text-center"
                               >
@@ -122,6 +128,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </button>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="box-1 float-left lay text-center"
                               >
@@ -138,6 +145,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </button>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="box-1 float-left lay-2 text-center"
                               >
@@ -154,6 +162,7 @@ const Bookmaker = ({ bookmaker }) => {
                                 </button>
                               </div>
                               <div
+                                onClick={() => setRunnerId(runner?.id)}
                                 _ngcontent-bym-c101
                                 className="box-1 float-left lay-1 text-center"
                               >
@@ -169,6 +178,9 @@ const Bookmaker = ({ bookmaker }) => {
                                   </span>
                                 </button>
                               </div>
+                              {runnerId === runner?.id && (
+                                <BetSlip setRunnerId={setRunnerId} />
+                              )}
                             </div>
                           );
                         })}

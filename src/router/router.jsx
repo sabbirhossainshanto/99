@@ -5,6 +5,7 @@ import EventDetails from "../pages/EventDetails/EventDetails";
 import Login from "../pages/Login/Login";
 import Casino from "../pages/Casino/Casino";
 import CasinoIFrame from "../pages/CasinoIFrame/CasinoIFrame";
+import Register from "../pages/Register/Register";
 
 export const router = createBrowserRouter(
   [
@@ -29,6 +30,10 @@ export const router = createBrowserRouter(
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
     },
     {
       path: "/casino/:name/:gameId",

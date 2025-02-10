@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useState } from "react";
 import { Status } from "../../../const";
+import BetSlip from "../../shared/BetSlip/BetSlip";
 
 const Fancy = ({ fancy }) => {
+  const [runnerId, setRunnerId] = useState(null);
   return (
     <div
       _ngcontent-bym-c104
@@ -301,7 +304,12 @@ const Fancy = ({ fancy }) => {
                                                   _ngcontent-bym-c102
                                                   className="box-1 float-left lay text-center"
                                                 >
-                                                  <button _ngcontent-bym-c102>
+                                                  <button
+                                                    onClick={() =>
+                                                      setRunnerId(games?.id)
+                                                    }
+                                                    _ngcontent-bym-c102
+                                                  >
                                                     <span
                                                       _ngcontent-bym-c102
                                                       className="odd d-block"
@@ -326,7 +334,12 @@ const Fancy = ({ fancy }) => {
                                                   _ngcontent-bym-c102
                                                   className="back box-1 float-left text-center"
                                                 >
-                                                  <button _ngcontent-bym-c102>
+                                                  <button
+                                                    onClick={() =>
+                                                      setRunnerId(games?.id)
+                                                    }
+                                                    _ngcontent-bym-c102
+                                                  >
                                                     <span
                                                       _ngcontent-bym-c102
                                                       className="odd d-block"
@@ -350,6 +363,11 @@ const Fancy = ({ fancy }) => {
                                               </div>
                                             </div>
                                           </div>
+                                          {runnerId === games?.id && (
+                                            <BetSlip
+                                              setRunnerId={setRunnerId}
+                                            />
+                                          )}
                                         </div>
                                       </div>
                                     </div>

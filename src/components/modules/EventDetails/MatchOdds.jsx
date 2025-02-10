@@ -1,8 +1,11 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useState } from "react";
 import { Status } from "../../../const";
+import BetSlip from "../../shared/BetSlip/BetSlip";
 
 const MatchOdds = ({ matchOdds }) => {
+  const [runnerId, setRunnerId] = useState(null);
   return (
     <>
       {matchOdds?.map((games) => {
@@ -71,7 +74,9 @@ const MatchOdds = ({ matchOdds }) => {
                               />
                             </p>
                           </div>
+
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="back-1 back1 blink box-1 float-left hidden-portrait text-center"
                           >
@@ -85,6 +90,7 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="back-2 back2 blink box-1 float-left hidden-portrait text-center"
                           >
@@ -98,6 +104,7 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="back blink box-1 float-left lock text-center"
                           >
@@ -115,6 +122,7 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="blink box-1 float-left lay text-center"
                           >
@@ -128,6 +136,7 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="blink box-1 float-left hidden-portrait lay-2 text-center"
                           >
@@ -141,6 +150,7 @@ const MatchOdds = ({ matchOdds }) => {
                             </button>
                           </div>
                           <div
+                            onClick={() => setRunnerId(runner?.id)}
                             _ngcontent-bym-c100
                             className="blink box-1 float-left hidden-portrait lay-1 text-center"
                           >
@@ -153,18 +163,13 @@ const MatchOdds = ({ matchOdds }) => {
                               </span>
                             </button>
                           </div>
+                          {runnerId === runner?.id && (
+                            <BetSlip setRunnerId={setRunnerId} />
+                          )}
                         </div>
                       );
                     })}
                   </div>
-                  {/* <div
-                    _ngcontent-bym-c100
-                    className="table-remark text-right remark"
-                  >
-                    <marquee _ngcontent-bym-c100>
-                      POLITICS : DELHI ELECTION 2025 MARKET BETS STARTED
-                    </marquee>
-                  </div> */}
                 </div>
               </div>
             </div>

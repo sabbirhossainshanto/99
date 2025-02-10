@@ -144,6 +144,7 @@ const Login = () => {
             {Settings.registration && (
               <div _ngcontent-wjb-c42 className="form-group mt-1">
                 <button
+                  onClick={() => navigate("/register")}
                   _ngcontent-wjb-c42
                   type="button"
                   className="btn btn-primary btn-block"
