@@ -26,9 +26,9 @@ const BetSlip = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { eventId } = useParams();
-  const { refetchCurrentBets } = useCurrentBets(eventId);
-  const { refetchBalance } = useBalance();
-  const { refetchExposure } = useExposure(eventId);
+  const { refetch: refetchCurrentBets } = useCurrentBets(eventId);
+  const { refetch: refetchBalance } = useBalance();
+  const { refetch: refetchExposure } = useExposure(eventId);
   const { placeBetValues, price, stake } = useSelector((state) => state?.event);
   const [createOrder] = useOrderMutation();
   const buttonValues = localStorage.getItem("buttonValue");
@@ -104,27 +104,20 @@ const BetSlip = () => {
     const delay = Settings.betDelay ? placeBetValues?.betDelay * 1000 : 0;
     // Introduce a delay before calling the API
     setTimeout(async () => {
-      try {
-        const res = await createOrder(payloadData).unwrap();
-        if (res?.success) {
-          setLoading(false);
-          refetchExposure();
-          refetchBalance();
-          setRunnerId("");
-          refetchCurrentBets();
-          setBetDelay("");
-          toast.success(res?.result?.result?.placed?.[0]?.message);
-        } else {
-          setLoading(false);
-          toast.error(
-            res?.error?.status?.[0]?.description || res?.error?.errorMessage
-          );
-          setBetDelay("");
-          setBetDelay(false);
-        }
-      } catch (error) {
-        console.error("Error placing order:", error);
-        toast.error("Something went wrong. Please try again.");
+      const res = await createOrder(payloadData).unwrap();
+      if (res?.success) {
+        setLoading(false);
+        refetchExposure();
+        refetchBalance();
+        dispatch(setRunnerId(null));
+        refetchCurrentBets();
+        setBetDelay("");
+        toast.success(res?.result?.result?.placed?.[0]?.message);
+      } else {
+        setLoading(false);
+        toast.error(
+          res?.error?.status?.[0]?.description || res?.error?.errorMessage
+        );
         setBetDelay("");
       }
     }, delay);

@@ -4,16 +4,21 @@ import { Status } from "../../../const";
 import BetSlip from "../../shared/BetSlip/BetSlip";
 import { useExposure } from "../../../hooks/exposure";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   setPlaceBetValues,
   setRunnerId,
 } from "../../../redux/features/events/eventSlice";
+import { useEffect, useState } from "react";
+import { Settings } from "../../../api";
+import { handleCashOutPlaceBet } from "../../../utils/handleCashoutPlaceBet";
 
 const MatchOdds = ({ matchOdds }) => {
+  const { eventId } = useParams();
+  const [teamProfit, setTeamProfit] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { runnerId } = useSelector((state) => state.event);
+  const { runnerId, stake, predictOdd } = useSelector((state) => state.event);
   const { token } = useSelector((state) => state.auth);
   const { data: exposure } = useExposure();
 
@@ -101,18 +106,153 @@ const MatchOdds = ({ matchOdds }) => {
     }
   };
 
+  const computeExposureAndStake = (
+    exposureA,
+    exposureB,
+    runner1,
+    runner2,
+    gameId
+  ) => {
+    let runner, largerExposure, layValue, oppositeLayValue, lowerExposure;
+
+    const pnlArr = [exposureA, exposureB];
+    const isOnePositiveExposure = onlyOnePositive(pnlArr);
+
+    if (exposureA > exposureB) {
+      // Team A has a larger exposure.
+      runner = runner1;
+      largerExposure = exposureA;
+      layValue = runner1?.lay?.[0]?.price;
+      oppositeLayValue = runner2?.lay?.[0]?.price;
+      lowerExposure = exposureB;
+    } else {
+      // Team B has a larger exposure.
+      runner = runner2;
+      largerExposure = exposureB;
+      layValue = runner2?.lay?.[0]?.price;
+      oppositeLayValue = runner1?.lay?.[0]?.price;
+      lowerExposure = exposureA;
+    }
+
+    // Compute the absolute value of the lower exposure.
+    let absLowerExposure = Math.abs(lowerExposure);
+
+    // Compute the liability for the team with the initially larger exposure.
+    let liability = absLowerExposure * (layValue - 1);
+
+    // Compute the new exposure of the team with the initially larger exposure.
+    let newExposure = largerExposure - liability;
+
+    // Compute the profit using the new exposure and the lay odds of the opposite team.
+    let profit = newExposure / layValue;
+
+    // Calculate the new stake value for the opposite team by adding profit to the absolute value of its exposure.
+    let newStakeValue = absLowerExposure + profit;
+
+    // Return the results.
+    return {
+      runner,
+      newExposure,
+      profit,
+      newStakeValue,
+      oppositeLayValue,
+      gameId,
+      isOnePositiveExposure,
+    };
+  };
+  function onlyOnePositive(arr) {
+    let positiveCount = arr?.filter((num) => num > 0).length;
+    return positiveCount === 1;
+  }
+  useEffect(() => {
+    let results = [];
+    if (
+      matchOdds?.length > 0 &&
+      exposure?.pnlBySelection &&
+      Object.keys(exposure?.pnlBySelection)?.length > 0
+    ) {
+      matchOdds.forEach((game) => {
+        const runners = game?.runners || [];
+        if (runners?.length === 2) {
+          const runner1 = runners[0];
+          const runner2 = runners[1];
+          const pnl1 = pnlBySelection?.find(
+            (pnl) => pnl?.RunnerId === runner1?.id
+          )?.pnl;
+          const pnl2 = pnlBySelection?.find(
+            (pnl) => pnl?.RunnerId === runner2?.id
+          )?.pnl;
+
+          if (pnl1 && pnl2 && runner1 && runner2) {
+            const result = computeExposureAndStake(
+              pnl1,
+              pnl2,
+              runner1,
+              runner2,
+              game?.id
+            );
+            results.push(result);
+          }
+        }
+      });
+      setTeamProfit(results);
+    } else {
+      setTeamProfit([]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matchOdds, eventId]);
+
+  let pnlBySelection;
+  if (exposure?.pnlBySelection) {
+    const obj = exposure?.pnlBySelection;
+    pnlBySelection = Object?.values(obj);
+  }
+
   return (
     <>
       {matchOdds?.map((games) => {
+        const teamProfitForGame = teamProfit?.find(
+          (profit) =>
+            profit?.gameId === games?.id && profit?.isOnePositiveExposure
+        );
+
         return (
           <div key={games?.id} _ngcontent-bym-c104>
             <div _ngcontent-bym-c104 _nghost-bym-c100>
               <div _ngcontent-bym-c100>
                 <div _ngcontent-bym-c100 className="market-title mt-1">
                   {games?.name?.toUpperCase()}
-                  <button _ngcontent-bym-c100 className="btn-cashout">
-                    cashout
-                  </button>
+                  {Settings.betFairCashOut &&
+                    games?.runners?.length !== 3 &&
+                    games?.status === "OPEN" && (
+                      <button
+                        onClick={() =>
+                          handleCashOutPlaceBet(
+                            games,
+                            "lay",
+                            dispatch,
+                            setRunnerId,
+                            pnlBySelection,
+                            token,
+                            teamProfitForGame
+                          )
+                        }
+                        style={{
+                          cursor: `${
+                            !teamProfitForGame ? "not-allowed" : "pointer"
+                          }`,
+                          opacity: `${!teamProfitForGame ? "0.6" : "1"}`,
+                        }}
+                        disabled={!teamProfitForGame}
+                        _ngcontent-gdr-c100=""
+                        class="btn-cashout"
+                      >
+                        cashout{" "}
+                        {teamProfitForGame?.profit &&
+                          teamProfitForGame?.profit?.toFixed(2)}
+                      </button>
+                    )}
+
                   <p _ngcontent-bym-c100 className="float-right mb-0">
                     <i _ngcontent-bym-c100 className="fas fa-info-circle" />
                   </p>
@@ -140,6 +280,13 @@ const MatchOdds = ({ matchOdds }) => {
                   </div>
                   <div _ngcontent-bym-c100 className="table-body">
                     {games?.runners?.map((runner) => {
+                      const pnl = pnlBySelection?.find(
+                        (pnl) => pnl?.RunnerId === runner?.id
+                      );
+                      const predictOddValues = predictOdd?.find(
+                        (val) => val?.id === runner?.id
+                      );
+
                       return (
                         <div
                           key={runner?.id}
@@ -162,12 +309,35 @@ const MatchOdds = ({ matchOdds }) => {
                             <span _ngcontent-bym-c100 className="team-name">
                               <b _ngcontent-bym-c100>{runner?.name}</b>
                             </span>
-                            <p _ngcontent-bym-c100 className="mob-expo-cs">
-                              <span
-                                _ngcontent-bym-c100
-                                className="float-left"
-                              />
-                            </p>
+
+                            {pnl && (
+                              <p _ngcontent-gdr-c100="" class="mob-expo-cs">
+                                <span _ngcontent-gdr-c100="" class="float-left">
+                                  <span
+                                    _ngcontent-gdr-c100=""
+                                    class={` ${
+                                      pnl?.pnl > 0 ? "text-green" : "text-red"
+                                    }`}
+                                  >
+                                    {" "}
+                                    {pnl?.pnl}
+                                  </span>
+                                </span>
+                              </p>
+                            )}
+                            {stake && runnerId && predictOddValues && (
+                              <p
+                                key={predictOddValues?.id}
+                                _ngcontent-gdr-c100=""
+                                class="mob-expo-cs"
+                              >
+                                <span _ngcontent-gdr-c100="" class="float-left">
+                                  <b _ngcontent-gdr-c100="" class="text-green">
+                                    &nbsp;({predictOddValues?.odd})
+                                  </b>
+                                </span>
+                              </p>
+                            )}
                           </div>
 
                           <div

@@ -56,11 +56,11 @@ const CasinoIFrame = () => {
         </div>
         <iframe
           _ngcontent-swn-c87=""
-          allowfullscreen="true"
+          allowFullScreen
           title="game"
           id="casino-link"
           className="embed-responsive-item"
-          src={data?.result?.url}
+          src={data?.gameUrl}
         ></iframe>
       </div>
     </div>

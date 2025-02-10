@@ -3,7 +3,7 @@
 import { useContext } from "react";
 import { ApiContext } from "../../context/ApiProvider";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Settings } from "../../api";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
@@ -25,25 +25,27 @@ const Login = () => {
       password: password,
       b2c: Settings.b2c,
     };
-    const result = await handleLogin(loginData).unwrap();
+    const data = await handleLogin(loginData).unwrap();
 
-    if (result.success) {
-      const token = result?.result?.token;
-      const bonusToken = result?.result?.bonusToken;
-      const user = result?.result?.loginName;
-      const game = result?.result?.buttonValue?.game;
-      const memberId = result?.result?.memberId;
+    if (data.success) {
+      const token = data?.result?.token;
+      const bonusToken = data?.result?.bonusToken;
+      const user = data?.result?.loginName;
+      const game = data?.result?.buttonValue?.game;
+      const memberId = data?.result?.memberId;
       dispatch(setUser({ user, token }));
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("token", token);
       localStorage.setItem("bonusToken", bonusToken);
-      if (token && user) {
+      if (data?.result?.changePassword) {
+        navigate("/change-password");
+      } else {
         navigate("/");
-        toast.success("Login successful");
+        toast.success(data?.result?.message);
       }
     } else {
-      toast.error(result?.error);
+      toast.error(data?.error);
     }
   };
 
@@ -154,6 +156,17 @@ const Login = () => {
                 </button>
               </div>
             )}
+
+            <div _ngcontent-kfy-c42="" class="form-group text-center">
+              <Link
+                to="/forgot-password"
+                _ngcontent-kfy-c42=""
+                style={{ color: "#193ba0" }}
+                class="fp "
+              >
+                Forgot Password
+              </Link>
+            </div>
 
             <small _ngcontent-wjb-c42 className="recaptchaTerms">
               This site is protected by reCAPTCHA and the Google{" "}

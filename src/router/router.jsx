@@ -6,6 +6,8 @@ import Login from "../pages/Login/Login";
 import Casino from "../pages/Casino/Casino";
 import CasinoIFrame from "../pages/CasinoIFrame/CasinoIFrame";
 import Register from "../pages/Register/Register";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 
 export const router = createBrowserRouter(
   [
@@ -34,6 +36,14 @@ export const router = createBrowserRouter(
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/change-password",
+      element: <ChangePassword />,
+    },
+    {
+      path: "/forgot-password",
+      element: <ForgotPassword />,
     },
     {
       path: "/casino/:name/:gameId",

@@ -1,4 +1,7 @@
-import { setPlaceBetValues, setShowComponent } from "../redux/features/events/eventSlice";
+import {
+  setPlaceBetValues,
+  setRunnerId,
+} from "../redux/features/events/eventSlice";
 
 /* handle place bet */
 export const handleCashOutPlaceBet = (
@@ -22,7 +25,7 @@ export const handleCashOutPlaceBet = (
           updatedPnl.push(pnl?.pnl);
         }
       });
-      dispatch(setShowComponent(true));
+
       dispatch(setPlaceBetValues(null));
       dispatch(
         setPlaceBetValues({
@@ -51,6 +54,7 @@ export const handleCashOutPlaceBet = (
           totalSize: team?.newStakeValue,
         })
       );
+      dispatch(setRunnerId(team?.runner?.id));
     }
   } else {
     navigate("/login");
