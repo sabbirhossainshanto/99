@@ -22,13 +22,15 @@ import { useCurrentBets } from "../../hooks/currentBets";
 import CurrentBets from "../../components/modules/EventDetails/CurrentBets";
 
 const EventDetails = () => {
-  const { data: currentBet } = useCurrentBets();
+  const { eventTypeId, eventId } = useParams();
+  const { data: currentBet } = useCurrentBets(eventId);
+
   const [tab, setTab] = useState("odd");
   const dispatch = useDispatch();
   const { placeBetValues, price, stake } = useSelector((state) => state.event);
   const [showIFrame, setShowIFrame] = useState(false);
   const [getIFrame, { data: IFrame }] = useAccessTokenMutation();
-  const { eventTypeId, eventId } = useParams();
+
   const { data } = useGetEventDetailsQuery(
     { eventTypeId, eventId },
     {

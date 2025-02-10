@@ -20,7 +20,7 @@ const Bookmaker = ({ bookmaker }) => {
   const dispatch = useDispatch();
   const { runnerId, stake, predictOdd } = useSelector((state) => state.event);
   const { token } = useSelector((state) => state.auth);
-  const { data: exposure } = useExposure();
+  const { data: exposure } = useExposure(eventId);
 
   const handleBetSlip = (betType, games, runner, price) => {
     if (token) {

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Status } from "../../../const";
 import BetSlip from "../../shared/BetSlip/BetSlip";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +11,12 @@ import {
 } from "../../../redux/features/events/eventSlice";
 
 const Fancy = ({ fancy }) => {
+  const { eventId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { runnerId } = useSelector((state) => state.event);
   const { token } = useSelector((state) => state.auth);
-  const { data: exposure } = useExposure();
+  const { data: exposure } = useExposure(eventId);
 
   const handleBetSlip = (betType, games, runner, price) => {
     if (token) {

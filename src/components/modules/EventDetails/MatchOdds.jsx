@@ -20,7 +20,7 @@ const MatchOdds = ({ matchOdds }) => {
   const dispatch = useDispatch();
   const { runnerId, stake, predictOdd } = useSelector((state) => state.event);
   const { token } = useSelector((state) => state.auth);
-  const { data: exposure } = useExposure();
+  const { data: exposure } = useExposure(eventId);
 
   const handleBetSlip = (betType, games, runner, price) => {
     if (token) {
@@ -332,7 +332,14 @@ const MatchOdds = ({ matchOdds }) => {
                                 class="mob-expo-cs"
                               >
                                 <span _ngcontent-gdr-c100="" class="float-left">
-                                  <b _ngcontent-gdr-c100="" class="text-green">
+                                  <b
+                                    _ngcontent-gdr-c100=""
+                                    class={` ${
+                                      predictOddValues?.odd > 0
+                                        ? "text-green"
+                                        : "text-red"
+                                    }`}
+                                  >
                                     &nbsp;({predictOddValues?.odd})
                                   </b>
                                 </span>
