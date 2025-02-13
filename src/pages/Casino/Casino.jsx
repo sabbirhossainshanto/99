@@ -1,11 +1,20 @@
 /* eslint-disable react/no-unknown-property */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../components/modules/Home/Header";
 import CasinoTab from "./CasinoTab/CasinoTab";
 import IntCasino from "./InCasinoTab/IntCasino";
+import { useLocation } from "react-router-dom";
 
 const Casino = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const category = params.get("category");
   const [tab, setTab] = useState("casino");
+  useEffect(() => {
+    if (category) {
+      setTab("intCasino");
+    }
+  }, [category]);
   return (
     <div _nghost-hot-c97>
       <div _ngcontent-hot-c97 className="main-content">

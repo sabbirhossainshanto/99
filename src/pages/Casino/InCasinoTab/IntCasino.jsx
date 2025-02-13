@@ -4,8 +4,12 @@ import { useMac88AllQuery } from "../../../redux/features/casino/casino.api";
 import CasinoThumbnail from "./CasinoThumbnail";
 import Tab2 from "./Tab2";
 import Tab1 from "./Tab1";
+import { useLocation } from "react-router-dom";
 
 const IntCasino = () => {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const category = params.get("category");
   const [filteredData, setFilteredData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedSubCategory, setSelectedSubCategory] = useState("All");
@@ -84,6 +88,16 @@ const IntCasino = () => {
   useEffect(() => {
     setSelectedSubCategory("All");
   }, [selectedCategory]);
+
+  useEffect(() => {
+    if (category) {
+      if (category === "Fun Games") {
+        setSelectedCategory(category);
+      } else {
+        setSelectedSubCategory(category);
+      }
+    }
+  }, [category]);
 
   return (
     <div _ngcontent-hot-c46 className="tab-content">

@@ -1,10 +1,17 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useNavigate } from "react-router-dom";
+
 const HighLightThumbnails = () => {
+  const navigate = useNavigate();
+  const handleNavigate = (link) => {
+    navigate(link);
+  };
   return (
     <>
       <div _ngcontent-htq-c97 className="row mx-0 mt-1">
         <div
+          onClick={() => handleNavigate("/casino?category=Aviator")}
           _ngcontent-htq-c97
           className="col-6 position-relative"
           style={{ paddingRight: "1px", paddingLeft: "1px" }}
@@ -17,6 +24,7 @@ const HighLightThumbnails = () => {
           />
         </div>
         <div
+          onClick={() => handleNavigate("/casino?category=Mines")}
           _ngcontent-htq-c97
           className="col-6 position-relative"
           style={{ paddingLeft: "1px", paddingRight: "1px" }}
@@ -31,6 +39,7 @@ const HighLightThumbnails = () => {
       </div>
       <div _ngcontent-htq-c97 className="row mx-0" style={{ marginTop: "2px" }}>
         <div
+          onClick={() => handleNavigate("/casino?category=Fun Games")}
           _ngcontent-htq-c97
           className="col-6 position-relative popularDiv"
           style={{ paddingRight: "1px", paddingLeft: "1px" }}
@@ -43,6 +52,7 @@ const HighLightThumbnails = () => {
           />
         </div>
         <div
+          onClick={() => handleNavigate("/casino?category=Color Prediction")}
           _ngcontent-htq-c97
           className="col-6 position-relative popularDiv"
           style={{ paddingLeft: "1px", paddingRight: "1px" }}
