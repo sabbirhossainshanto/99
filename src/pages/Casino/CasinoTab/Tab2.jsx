@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
-const Tab2 = ({ categories, setSelectedCategory, selectedCategory }) => {
+const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
   return (
     <ul
       _ngcontent-hot-c46
@@ -9,15 +9,19 @@ const Tab2 = ({ categories, setSelectedCategory, selectedCategory }) => {
       aria-label="Tabs"
     >
       <li
-        onClick={() => setSelectedCategory("All")}
+        onClick={() => setSelectedSubCategory("All")}
         _ngcontent-hot-c46
-        className={` nav-item ${selectedCategory === "All" ? "active " : ""}`}
+        className={` nav-item ${
+          selectedSubCategory === "All" ? "active " : ""
+        }`}
       >
         <a
           _ngcontent-hot-c46
           href="javascript:void(0);"
           role="tab"
-          className={`nav-link ${selectedCategory === "All" ? "active " : ""}`}
+          className={`nav-link ${
+            selectedSubCategory === "All" ? "active " : ""
+          }`}
           aria-controls="goto-c-casino-0"
           aria-selected="true"
           id="goto-c-casino-0-link"
@@ -36,11 +40,11 @@ const Tab2 = ({ categories, setSelectedCategory, selectedCategory }) => {
       {categories?.map((category) => {
         return (
           <li
-            onClick={() => setSelectedCategory(category)}
+            onClick={() => setSelectedSubCategory(category)}
             key={category}
             _ngcontent-hot-c46
             className={` nav-item ${
-              selectedCategory === category ? "active" : ""
+              selectedSubCategory === category ? "active" : ""
             }`}
           >
             <a
@@ -48,7 +52,7 @@ const Tab2 = ({ categories, setSelectedCategory, selectedCategory }) => {
               href="javascript:void(0);"
               role="tab"
               className={`nav-link ${
-                selectedCategory === category ? "active " : ""
+                selectedSubCategory === category ? "active " : ""
               }`}
               aria-controls="goto-c-casino-0"
               aria-selected="true"
