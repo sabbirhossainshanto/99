@@ -9,6 +9,7 @@ import Notification from "./Notification";
 import useBalance from "../../../hooks/balance";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
+import images from "../../../assets/images";
 
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
@@ -80,6 +81,30 @@ const Header = () => {
                 </div>
               </div>
             </div>
+          </div>
+          <div _ngcontent-uxw-c82="" className="btns__deposit_withdrawal">
+            <Link _ngcontent-uxw-c82="" className="btn_deposit" to="/deposit">
+              <img
+                _ngcontent-uxw-c82=""
+                routerlink="/deposit"
+                src={images.deposit}
+                className="img-fluid"
+              />
+              deposit{" "}
+            </Link>
+            <Link
+              _ngcontent-uxw-c82=""
+              routerlink="/withdraw"
+              className="btn_withdrawal"
+              to="/withdraw"
+            >
+              <img
+                _ngcontent-uxw-c82=""
+                src={images.withdraw}
+                className="img-fluid"
+              />
+              withdrawal
+            </Link>
           </div>
           <div _ngcontent-htq-c82 className="row row5 header-bottom">
             <div _ngcontent-htq-c82 className="col-12">

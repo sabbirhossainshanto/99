@@ -8,6 +8,7 @@ import CasinoIFrame from "../pages/CasinoIFrame/CasinoIFrame";
 import Register from "../pages/Register/Register";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
+import Deposit from "../pages/Deposit/Deposit";
 
 export const router = createBrowserRouter(
   [
@@ -26,6 +27,10 @@ export const router = createBrowserRouter(
         {
           path: "/casino",
           element: <Casino />,
+        },
+        {
+          path: "/deposit",
+          element: <Deposit />,
         },
       ],
     },
