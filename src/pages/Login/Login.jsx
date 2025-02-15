@@ -42,7 +42,7 @@ const Login = () => {
         navigate("/change-password");
       } else {
         navigate("/");
-        toast.success(data?.result?.message);
+        toast.success("Login Successful");
       }
     } else {
       toast.error(data?.error);
