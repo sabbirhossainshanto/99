@@ -2739,26 +2739,32 @@ html [type="button"] {
   margin-bottom: 0;
   list-style: none;
 }
+
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
 }
+
 .nav-link:focus,
 .nav-link:hover {
   text-decoration: none;
 }
+
 .nav-tabs {
   border-bottom: 1px solid #dee2e6;
 }
+
 .nav-tabs .nav-link {
   border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
+
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
   border-color: #e9ecef #e9ecef #dee2e6;
 }
+
 .nav-tabs .nav-link.active {
   color: #495057;
   background-color: #fff;
@@ -2772,6 +2778,7 @@ html [type="button"] {
     text-shadow: none !important;
     box-shadow: none !important;
   }
+
   img {
     page-break-inside: avoid;
   }
@@ -2787,6 +2794,7 @@ html [type="button"] {
   padding: 10px 0;
   border-bottom: 5px solid #e4e4e4;
 }
+
 .bankingUi .nav-tabs button {
   font-size: 12px;
   background: none;
@@ -2798,20 +2806,24 @@ html [type="button"] {
   font-weight: 500;
   padding: 5px 10px;
 }
+
 .bankingUi .nav-tabs button.active,
 .bankingUi .nav-tabs button.active:hover {
   background: var(--theme-secondary);
   color: #fff;
 }
+
 .bankingUi .nav-tabs button:hover {
   background: #f3f2f6;
 }
+
 .bankingUi .nav-tabs button img {
   display: block;
   margin: 0 auto;
   width: 40px;
   object-fit: contain;
 }
+
 .bankingUi .nav-tabs button.active img {
   filter: invert(1);
 }
@@ -2820,11 +2832,13 @@ html [type="button"] {
   .bankingUi .nav-tabs {
     justify-content: start !important;
   }
+
   .bankingUi .nav-tabs button {
     padding: 10px;
     margin: 0 1px;
     font-size: 13px;
   }
+
   .bankingUi .nav-tabs button img {
     width: 25px;
   }
@@ -2845,49 +2859,61 @@ html [type="button"] {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 .btn:focus,
 .btn:hover {
   text-decoration: none;
 }
+
 .btn:focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
+
 .btn:disabled {
   opacity: 0.65;
 }
+
 .btn:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
+
 .btn:not(:disabled):not(.disabled):active {
   background-image: none;
 }
+
 .btn-success {
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
 }
+
 .btn-success:hover {
   color: #fff;
   background-color: #218838;
   border-color: #1e7e34;
 }
+
 .btn-success:focus {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
 }
+
 .btn-success:disabled {
   color: #fff;
   background-color: #28a745;
   border-color: #28a745;
 }
+
 .btn-success:not(:disabled):not(.disabled):active {
   color: #fff;
   background-color: #1e7e34;
   border-color: #1c7430;
 }
+
 .btn-success:not(:disabled):not(.disabled):active:focus {
   box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
 }
+
 .btn-sm {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
@@ -2906,13 +2932,16 @@ html [type="button"] {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
+
 .card-body {
   flex: 1 1 auto;
   padding: 1.25rem;
 }
+
 .card-text:last-child {
   margin-bottom: 0;
 }
+
 .justify-content-center {
   justify-content: center !important;
 }
@@ -2926,13 +2955,16 @@ html [type="button"] {
   padding: 8px;
   margin-bottom: 20px;
 }
+
 .bankingUi .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 5px 0 #ddd;
 }
+
 .bankingUi .card .card-body {
   text-align: center;
 }
+
 .bankingUi .card .card-text {
   font-weight: 300;
   font-size: 13px;
@@ -2943,18 +2975,22 @@ html [type="button"] {
   color: #222;
   border-bottom: 1px solid #eaecef;
 }
+
 .bankingUi .card .card-text:last-child {
   border-bottom: none;
 }
+
 .bankingUi .card .card-text:hover {
   color: #000;
 }
+
 .bankingUi .account-data {
   background: #f3f2f6;
   padding: 10px;
   border-radius: 15px;
   margin-bottom: 10px;
 }
+
 .bankingUi .card .card-text button {
   border: none;
   background: none;
@@ -2966,6 +3002,7 @@ html [type="button"] {
   width: 20px;
   height: 20px;
 }
+
 .bankingUi .card .card-text button:hover {
   color: var(--theme-primary);
 }
@@ -2976,15 +3013,18 @@ html [type="button"] {
   padding: 10px !important;
   text-align: center;
 }
+
 .payment-issues p {
   margin: 0;
 }
+
 .payment-issues p i {
   font-size: 12px;
   color: #fff;
   animation: zoom-in-zoom-out 2s ease-out infinite;
   font-weight: 700;
 }
+
 .payment-issues p b {
   font-size: 10px;
   font-weight: 900;
@@ -2997,6 +3037,7 @@ html [type="button"] {
   padding: 0px;
   color: #000;
 }
+
 .card-body.upi-bank p {
   margin: 0;
   text-transform: uppercase;
@@ -3004,6 +3045,7 @@ html [type="button"] {
   text-align: center;
   font-weight: 600;
 }
+
 .card-body.upi-bank p b {
   color: var(--theme-primary);
   text-shadow: 0 8px 10px #a4a4a4, 0 -2px 0px #ffffff;
@@ -3013,12 +3055,15 @@ html [type="button"] {
   .bankingUi .account-data {
     padding: 5px;
   }
+
   .bankingUi .card .card-text {
     padding: 2px;
   }
+
   .bankingUi .card .card-text button {
     right: 1px;
   }
+
   .bankingUi .card .card-body {
     padding: 10px;
   }

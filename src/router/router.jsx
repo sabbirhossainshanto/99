@@ -28,10 +28,6 @@ export const router = createBrowserRouter(
           path: "/casino",
           element: <Casino />,
         },
-        {
-          path: "/deposit",
-          element: <Deposit />,
-        },
       ],
     },
     {
@@ -53,6 +49,10 @@ export const router = createBrowserRouter(
     {
       path: "/casino/:name/:gameId",
       element: <CasinoIFrame />,
+    },
+    {
+      path: "/deposit",
+      element: <Deposit />,
     },
   ],
   {
