@@ -19,9 +19,9 @@ const Events = ({ homeTab }) => {
     data &&
     Object.keys(data)?.filter((key) => {
       if (homeTab === "inPlay") {
-        return data?.[key]?.visible === true;
+        return data?.[key]?.visible === true && data?.[key]?.inPlay === 1;
       } else {
-        return data;
+        return data?.[key]?.visible;
       }
     });
 

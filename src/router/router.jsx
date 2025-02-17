@@ -11,6 +11,11 @@ import Deposit from "../pages/Deposit/Deposit";
 import ChangePasswordLogin from "../pages/ChangePasswordLogin/ChangePasswordLogin";
 import ChangePassword from "../pages/ChangePassword/ChangePassword";
 import ChangeButtonValue from "../pages/ChangeButtonValue/ChangeButtonValue";
+import AccountStatement from "../pages/AccountStatement/AccountStatement";
+import UnSettledBets from "../pages/UnSettledBets/UnSettledBets";
+import Rules from "../pages/Rules/Rules";
+import SportsBook from "../pages/SportsBook/SportsBook";
+import Other from "../pages/Other/Other";
 
 export const router = createBrowserRouter(
   [
@@ -39,6 +44,22 @@ export const router = createBrowserRouter(
           path: "/change-btn-value",
           element: <ChangeButtonValue />,
         },
+        {
+          path: "/account-statement",
+          element: <AccountStatement />,
+        },
+        {
+          path: "/unsettled-bets",
+          element: <UnSettledBets />,
+        },
+        {
+          path: "/rules",
+          element: <Rules />,
+        },
+        {
+          path: "/other",
+          element: <Other />,
+        },
       ],
     },
     {
@@ -64,6 +85,10 @@ export const router = createBrowserRouter(
     {
       path: "/deposit",
       element: <Deposit />,
+    },
+    {
+      path: "/sports-book",
+      element: <SportsBook />,
     },
   ],
   {

@@ -22,8 +22,10 @@ import ic_fancy from "../img/ic_fancy.webp";
 import casino from "../img/99999.png";
 import int_casino from "../img/99998.png";
 import all from "../icon/all.svg";
+import landMark from "../img/landmark-icon.webp";
 
 export default {
+  landMark,
   int_casino,
   casino,
   ic_fancy,

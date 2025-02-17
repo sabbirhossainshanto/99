@@ -83,7 +83,9 @@ const Header = () => {
           _ngcontent-htq-c46
           to="/other"
           role="tab"
-          className="nav-link"
+          className={`nav-link  ${
+            location.pathname === "/other" ? "active" : ""
+          }`}
           aria-controls
           aria-selected="false"
           id

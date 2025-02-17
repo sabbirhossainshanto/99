@@ -59,7 +59,7 @@ const Header = () => {
               <p _ngcontent-htq-c82 className="mb-0">
                 <img
                   _ngcontent-htq-c82
-                  src="/src/assets/img/landmark-icon.webp"
+                  src={images.landMark}
                   alt="Exchange"
                   className="img-fluid pr-1"
                 />

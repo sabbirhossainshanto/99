@@ -12,8 +12,12 @@ import {
 import { useEffect, useState } from "react";
 import { handleCashOutPlaceBet } from "../../../utils/handleCashoutPlaceBet";
 import { Settings } from "../../../api";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import MarketRule from "../../modals/MarketRule/MarketRule";
 
 const Bookmaker = ({ bookmaker }) => {
+  const [showRule, setShowRule] = useState(false);
   const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
   const navigate = useNavigate();
@@ -208,6 +212,7 @@ const Bookmaker = ({ bookmaker }) => {
   }
   return (
     <>
+      {showRule && <MarketRule setShowRule={setShowRule} />}
       {bookmaker?.map((games) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
@@ -223,7 +228,8 @@ const Bookmaker = ({ bookmaker }) => {
                       {games?.name?.toUpperCase()}
                       {Settings.betFairCashOut &&
                         games?.runners?.length !== 3 &&
-                        games?.status === "OPEN" && (
+                        games?.status === "OPEN" &&
+                        games?.name !== "toss" && (
                           <button
                             onClick={() =>
                               handleCashOutPlaceBet(
@@ -252,7 +258,10 @@ const Bookmaker = ({ bookmaker }) => {
                           </button>
                         )}
                       <p _ngcontent-bym-c101 className="float-right mb-0">
-                        <i _ngcontent-bym-c101 className="fas fa-info-circle" />
+                        <FontAwesomeIcon
+                          onClick={() => setShowRule(true)}
+                          icon={faInfoCircle}
+                        />
                       </p>
                     </div>
                     <div _ngcontent-bym-c101 className="bookmaker-market">
@@ -261,7 +270,9 @@ const Bookmaker = ({ bookmaker }) => {
                           _ngcontent-bym-c101
                           className="float-left country-name box-6 min-max"
                         >
-                          <b _ngcontent-bym-c101>Min:100 Max:2500000</b>
+                          <b _ngcontent-bym-c101>
+                            Min:100 Max:{games?.maxLiabilityPerBet}
+                          </b>
                         </div>
                         <div
                           _ngcontent-bym-c101
@@ -286,6 +297,7 @@ const Bookmaker = ({ bookmaker }) => {
                           );
                           return (
                             <div
+                              style={{ height: "37px" }}
                               key={runner?.id}
                               _ngcontent-bym-c101
                               className={`table-row ${
@@ -338,7 +350,11 @@ const Bookmaker = ({ bookmaker }) => {
                                     >
                                       <b
                                         _ngcontent-gdr-c100=""
-                                        class="text-green"
+                                        class={` ${
+                                          predictOddValues?.odd > 0
+                                            ? "text-green"
+                                            : "text-red"
+                                        }`}
                                       >
                                         &nbsp;({predictOddValues?.odd})
                                       </b>

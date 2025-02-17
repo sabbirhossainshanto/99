@@ -137,7 +137,7 @@ const BetSlip = () => {
     }
   }, [setBetDelay, betDelay]);
   return (
-    <div _ngcontent-ukj-c100="">
+    <div _ngcontent-ukj-c100="" style={{ zIndex: "999" }}>
       <div _ngcontent-ukj-c100="" _nghost-ukj-c63="">
         <div
           _ngcontent-ukj-c63=""

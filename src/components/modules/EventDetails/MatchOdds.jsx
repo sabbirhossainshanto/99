@@ -12,8 +12,12 @@ import {
 import { useEffect, useState } from "react";
 import { Settings } from "../../../api";
 import { handleCashOutPlaceBet } from "../../../utils/handleCashoutPlaceBet";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import MarketRule from "../../modals/MarketRule/MarketRule";
 
 const MatchOdds = ({ matchOdds }) => {
+  const [showRule, setShowRule] = useState(false);
   const { eventId } = useParams();
   const [teamProfit, setTeamProfit] = useState([]);
   const navigate = useNavigate();
@@ -210,6 +214,7 @@ const MatchOdds = ({ matchOdds }) => {
 
   return (
     <>
+      {showRule && <MarketRule setShowRule={setShowRule} />}
       {matchOdds?.map((games) => {
         const teamProfitForGame = teamProfit?.find(
           (profit) =>
@@ -224,7 +229,8 @@ const MatchOdds = ({ matchOdds }) => {
                   {games?.name?.toUpperCase()}
                   {Settings.betFairCashOut &&
                     games?.runners?.length !== 3 &&
-                    games?.status === "OPEN" && (
+                    games?.status === "OPEN" &&
+                    games?.name !== "toss" && (
                       <button
                         onClick={() =>
                           handleCashOutPlaceBet(
@@ -254,7 +260,10 @@ const MatchOdds = ({ matchOdds }) => {
                     )}
 
                   <p _ngcontent-bym-c100 className="float-right mb-0">
-                    <i _ngcontent-bym-c100 className="fas fa-info-circle" />
+                    <FontAwesomeIcon
+                      onClick={() => setShowRule(true)}
+                      icon={faInfoCircle}
+                    />
                   </p>
                 </div>
                 <div _ngcontent-bym-c100 className="main-market">
@@ -263,7 +272,9 @@ const MatchOdds = ({ matchOdds }) => {
                       _ngcontent-bym-c100
                       className="float-left country-name box-6 min-max"
                     >
-                      <b _ngcontent-bym-c100>Min:100 Max:100000</b>
+                      <b _ngcontent-bym-c100>
+                        Min:100 Max:{games?.maxLiabilityPerBet}
+                      </b>
                     </div>
                     <div
                       _ngcontent-bym-c100
@@ -289,6 +300,7 @@ const MatchOdds = ({ matchOdds }) => {
 
                       return (
                         <div
+                          style={{ height: "37px" }}
                           key={runner?.id}
                           _ngcontent-bym-c100
                           className={`table-row ${

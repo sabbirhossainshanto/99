@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import useCloseModalClickOutside from "../../../hooks/closeModal";
 
 const Banner = () => {
+  const modalRef = useRef();
   const { token } = useSelector((state) => state.auth);
   const [showModal, setShowModal] = useState(false);
   const modal = JSON.parse(localStorage.getItem("modal"));
@@ -17,6 +19,10 @@ const Banner = () => {
     setShowModal(false);
     localStorage.setItem("hasModalBeenShown", "true");
   };
+
+  useCloseModalClickOutside(modalRef, () => {
+    closeModal();
+  });
   return (
     <>
       {token && showModal && modal && (
@@ -30,7 +36,7 @@ const Banner = () => {
           style={{ display: "block" }}
         >
           <div className="modal-dialog bookModal app_version">
-            <div className="modal-content">
+            <div className="modal-content" ref={modalRef}>
               <div className="modal-body p-0">
                 <button
                   onClick={closeModal}

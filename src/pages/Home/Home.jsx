@@ -7,6 +7,7 @@ import HighLightThumbnails from "../../components/modules/Home/HighLightThumbnai
 import HomeThumbnails from "../../components/modules/Home/HomeThumbnails";
 import NotUsing from "../../components/modules/Home/NotUsing";
 import Tab from "../../components/modules/Home/Tab";
+import Other from "../../components/modules/Home/Other";
 
 const Home = () => {
   const { homeTab } = useSelector((state) => state.global);
@@ -58,6 +59,7 @@ const Home = () => {
         {homeTab === "inPlay" && <HighLightThumbnails />}
 
         {homeTab === "inPlay" && <HomeThumbnails />}
+        {homeTab === "other" && <Other />}
       </div>
     </div>
   );

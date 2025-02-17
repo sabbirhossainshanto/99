@@ -25,30 +25,18 @@ const Dropdown = ({ showDropdown }) => {
       </Link>
       <Link
         _ngcontent-htq-c82
-        to="/reports/account-statement"
+        to="/account-statement"
         className="dropdown-item"
       >
         Account Statement
       </Link>
-      <Link
-        _ngcontent-htq-c82
-        to="/reports/profit-loss"
-        className="dropdown-item"
-      >
+      <Link _ngcontent-htq-c82 to="/profit-loss" className="dropdown-item">
         Profit Loss Report
       </Link>
-      <Link
-        _ngcontent-htq-c82
-        to="/reports/bet-history"
-        className="dropdown-item"
-      >
+      <Link _ngcontent-htq-c82 to="/bet-history" className="dropdown-item">
         Bet History
       </Link>
-      <Link
-        _ngcontent-htq-c82
-        to="/reports/unsettled-bets"
-        className="dropdown-item"
-      >
+      <Link _ngcontent-htq-c82 to="/unsettled-bets" className="dropdown-item">
         Unsetteled Bet
       </Link>
       <Link _ngcontent-htq-c82 to="change-btn-value" className="dropdown-item">
