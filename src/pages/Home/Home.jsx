@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useSelector } from "react-redux";
 import Events from "../../components/modules/Home/Events";
 import Header from "../../components/modules/Home/Header";
 import HighLightThumbnails from "../../components/modules/Home/HighLightThumbnails";
@@ -8,6 +9,8 @@ import NotUsing from "../../components/modules/Home/NotUsing";
 import Tab from "../../components/modules/Home/Tab";
 
 const Home = () => {
+  const { homeTab } = useSelector((state) => state.global);
+
   return (
     <div _ngcontent-htq-c97 className="main-content">
       <div _ngcontent-htq-c97 className="position-relative">
@@ -38,7 +41,7 @@ const Home = () => {
                   className="tab-container"
                 >
                   <Tab />
-                  <Events />
+                  <Events homeTab={homeTab} />
                 </div>
               </div>
             </div>
@@ -52,8 +55,9 @@ const Home = () => {
             <NotUsing />
           </div>
         </div>
-        <HighLightThumbnails />
-        <HomeThumbnails />
+        {homeTab === "inPlay" && <HighLightThumbnails />}
+
+        {homeTab === "inPlay" && <HomeThumbnails />}
       </div>
     </div>
   );

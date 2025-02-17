@@ -6,7 +6,6 @@ import Login from "../pages/Login/Login";
 import Casino from "../pages/Casino/Casino";
 import CasinoIFrame from "../pages/CasinoIFrame/CasinoIFrame";
 import Register from "../pages/Register/Register";
-
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Deposit from "../pages/Deposit/Deposit";
 import ChangePasswordLogin from "../pages/ChangePasswordLogin/ChangePasswordLogin";
@@ -23,6 +22,7 @@ export const router = createBrowserRouter(
           index: true,
           element: <Home />,
         },
+
         {
           path: "/event-details/:eventTypeId/:eventId",
           element: <EventDetails />,

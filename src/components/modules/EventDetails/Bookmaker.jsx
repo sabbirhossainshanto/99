@@ -230,9 +230,9 @@ const Bookmaker = ({ bookmaker }) => {
                                 games,
                                 "lay",
                                 dispatch,
-                                setRunnerId,
                                 pnlBySelection,
                                 token,
+                                navigate,
                                 teamProfitForGame
                               )
                             }

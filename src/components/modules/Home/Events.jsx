@@ -1,12 +1,11 @@
-/* eslint-disable react/no-unknown-property */
-
 import { useSelector } from "react-redux";
 import { useGroupQuery } from "../../../redux/features/events/events";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
+import images from "../../../assets/images";
 
-const Events = () => {
+const Events = ({ homeTab }) => {
   const navigate = useNavigate();
   const { group } = useSelector((state) => state.global);
   const { data } = useGroupQuery(
@@ -19,7 +18,11 @@ const Events = () => {
   const filterSports =
     data &&
     Object.keys(data)?.filter((key) => {
-      return data?.[key]?.visible === true;
+      if (homeTab === "inPlay") {
+        return data?.[key]?.visible === true;
+      } else {
+        return data;
+      }
     });
 
   const navigateGameList = (keys) => {
@@ -27,15 +30,9 @@ const Events = () => {
   };
 
   return (
-    <div _ngcontent-htq-c46 className="tab-content">
-      <div
-        _ngcontent-htq-c97
-        role="tabpanel"
-        aria-labelledby
-        className="tab-pane active"
-      >
+    <div className="tab-content">
+      <div role="tabpanel" aria-labelledby className="tab-pane active">
         <div
-          _ngcontent-htq-c97
           style={{
             display: "flex",
             alignItems: "center",
@@ -43,55 +40,43 @@ const Events = () => {
             position: "relative",
           }}
         >
-          <ul
-            _ngcontent-htq-c97
-            className="live_virtual"
-            style={{ display: "flex" }}
-          >
-            <li _ngcontent-htq-c97>
+          <ul className="live_virtual" style={{ display: "flex" }}>
+            <li>
               <input
-                _ngcontent-htq-c97
                 type="checkbox"
                 defaultValue="Order one"
                 id="checkboxOne4-inplay"
                 className="ng-untouched ng-pristine ng-valid"
               />
-              <label _ngcontent-htq-c97 htmlFor="checkboxOne4-inplay">
-                LIVE
-              </label>
+              <label htmlFor="checkboxOne4-inplay">LIVE</label>
             </li>
-            <li _ngcontent-htq-c97>
+            <li>
               <input
-                _ngcontent-htq-c97
                 type="checkbox"
                 defaultValue="Order Two"
                 id="checkboxTwo4-inplay"
                 className="ng-untouched ng-pristine ng-valid"
               />
-              <label _ngcontent-htq-c97 htmlFor="checkboxTwo4-inplay">
-                VIRTUAL
-              </label>
+              <label htmlFor="checkboxTwo4-inplay">VIRTUAL</label>
             </li>
           </ul>
-          <div _ngcontent-htq-c97 className="filter-ct">
-            <label _ngcontent-htq-c97>View by:</label>
-            <select
-              _ngcontent-htq-c97
-              className="form-control-sm ng-untouched ng-pristine ng-valid"
-            >
-              <option _ngcontent-htq-c97 value="c">
-                Competitions
-              </option>
-              <option _ngcontent-htq-c97 value="t">
-                Time
-              </option>
+          <div className="filter-ct">
+            <label>View by:</label>
+            <select className="form-control-sm ng-untouched ng-pristine ng-valid">
+              <option value="c">Competitions</option>
+              <option value="t">Time</option>
             </select>
           </div>
         </div>
-        <div _ngcontent-htq-c97 _nghost-htq-c95>
-          <div _ngcontent-htq-c95>
-            <div _ngcontent-htq-c95 className="game-listing-container">
-              <div _ngcontent-htq-c95>
+        <div>
+          <div>
+            <div
+              className="game-listing-container"
+              style={{
+                maxHeight: homeTab === "inPlay" ? "230px" : "100%",
+              }}
+            >
+              <div>
                 {data && Object.values(data).length > 0 ? (
                   filterSports
                     ?.sort((keyA, keyB) => {
@@ -116,39 +101,21 @@ const Events = () => {
                       return (
                         <div
                           key={index}
-                          _ngcontent-htq-c95
                           className="game-list pt-1 pb-1 container-fluid"
                         >
-                          <a
-                            _ngcontent-htq-c95
-                            onClick={() => navigateGameList(key)}
-                          >
-                            <div _ngcontent-htq-c95 className="row row5">
-                              <div _ngcontent-htq-c95 className="col-8">
-                                <p
-                                  _ngcontent-htq-c95
-                                  className="mb-0 game-name"
-                                >
-                                  <strong _ngcontent-htq-c95>
-                                    {data?.[key]?.eventName}
-                                  </strong>
+                          <a onClick={() => navigateGameList(key)}>
+                            <div className="row row5">
+                              <div className="col-8">
+                                <p className="mb-0 game-name">
+                                  <strong>{data?.[key]?.eventName}</strong>
                                 </p>
-                                <p _ngcontent-htq-c95 className="mb-0">
-                                  {data?.[key]?.date}
-                                </p>
+                                <p className="mb-0">{data?.[key]?.date}</p>
                               </div>
-                              <div
-                                _ngcontent-htq-c95
-                                className="col-4 text-right"
-                              >
-                                <div _ngcontent-htq-c95 className="game-icons">
+                              <div className="col-4 text-right">
+                                <div className="game-icons">
                                   {data[key]?.inPlay === 1 && (
-                                    <span
-                                      _ngcontent-htq-c95
-                                      className="game-icon"
-                                    >
+                                    <span className="game-icon">
                                       <span
-                                        _ngcontent-htq-c95
                                         className="active-icon"
                                         style={{
                                           verticalAlign: "bottom",
@@ -157,12 +124,9 @@ const Events = () => {
                                     </span>
                                   )}
                                   {data[key]?.isTv === 1 && (
-                                    <span
-                                      _ngcontent-htq-c95
-                                      className="game-icon"
-                                    >
+                                    <span className="game-icon">
                                       {/* <i
-                                        _ngcontent-htq-c95
+                                        
                                         className="fas fa-tv"
                                       /> */}
                                       <FontAwesomeIcon
@@ -175,96 +139,65 @@ const Events = () => {
                                     </span>
                                   )}
                                   {data[key]?.isFancy === 1 && (
-                                    <span
-                                      _ngcontent-htq-c95
-                                      className="game-icon"
-                                    >
-                                      <img
-                                        _ngcontent-htq-c95
-                                        src="/src/assets/img/ic_fancy.webp"
-                                      />
+                                    <span className="game-icon">
+                                      <img src={images.ic_fancy} />
                                     </span>
                                   )}
                                   {data[key]?.isBookmaker === 1 && (
-                                    <span
-                                      _ngcontent-htq-c95
-                                      className="game-icon"
-                                    >
+                                    <span className="game-icon">
                                       <img
-                                        _ngcontent-htq-c95
-                                        src="/src/assets/img/ic_bm.webp"
+                                        src={images.ic_bm}
                                         className="bm-icon"
                                       />
                                     </span>
                                   )}
 
-                                  <span
-                                    _ngcontent-htq-c95
-                                    className="game-icon"
-                                  />
+                                  <span className="game-icon" />
                                 </div>
                               </div>
                             </div>
                           </a>
-                          <div _ngcontent-htq-c95 className="row row5">
-                            <div _ngcontent-htq-c95 className="col-12">
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <b _ngcontent-htq-c95>1</b>
+                          <div className="row row5">
+                            <div className="col-12">
+                              <div className="text-center game-col game-home">
+                                <b>1</b>
                               </div>
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <b _ngcontent-htq-c95>X</b>
+                              <div className="text-center game-col game-home">
+                                <b>X</b>
                               </div>
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <b _ngcontent-htq-c95>2</b>
+                              <div className="text-center game-col game-home">
+                                <b>2</b>
                               </div>
                             </div>
                           </div>
-                          <div _ngcontent-htq-c95 className="row row5">
-                            <div _ngcontent-htq-c95 className="col-12">
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <a _ngcontent-htq-c95 className="btn-back">
+                          <div className="row row5">
+                            <div className="col-12">
+                              <div className="text-center game-col game-home">
+                                <a className="btn-back">
                                   {data[key]?.[0]?.ex?.availableToBack[0]
                                     ?.price ?? "-"}
                                 </a>
-                                <a _ngcontent-htq-c95 className="btn-lay">
+                                <a className="btn-lay">
                                   {data[key]?.[0]?.ex?.availableToLay[0]
                                     ?.price ?? "-"}
                                 </a>
                               </div>
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <a _ngcontent-htq-c95 className="btn-back">
+                              <div className="text-center game-col game-home">
+                                <a className="btn-back">
                                   {data[key]?.[2]?.ex?.availableToBack[0]
                                     ?.price ?? "-"}
                                 </a>
-                                <a _ngcontent-htq-c95 className="btn-lay">
+                                <a className="btn-lay">
                                   {data[key]?.[2]?.ex?.availableToLay[0]
                                     ?.price ?? "-"}
                                 </a>
                               </div>
-                              <div
-                                _ngcontent-htq-c95
-                                className="text-center game-col game-home"
-                              >
-                                <a _ngcontent-htq-c95 className="btn-back">
+                              <div className="text-center game-col game-home">
+                                <a className="btn-back">
                                   {data[key]?.[1]?.ex?.availableToBack[0]
                                     ?.price ?? "-"}
                                 </a>
-                                <a _ngcontent-htq-c95 className="btn-lay">
+                                <a className="btn-lay">
                                   {data[key]?.[1]?.ex?.availableToLay[0]
                                     ?.price ?? "-"}
                                 </a>

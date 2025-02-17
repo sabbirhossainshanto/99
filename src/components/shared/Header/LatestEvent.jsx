@@ -24,7 +24,7 @@ const LatestEvent = ({ latestEvent }) => {
                   alt=""
                   src={`/src/assets/img/${event?.eventTypeId}.png`}
                 />
-                <span _ngcontent-htq-c80>Delhi Election 2025</span>
+                <span _ngcontent-htq-c80>{event?.eventName}</span>
               </Link>
             </div>
           );

@@ -1,9 +1,9 @@
-/* eslint-disable react/no-unknown-property */
 import { useEffect, useState } from "react";
 import Header from "../../components/modules/Home/Header";
 import CasinoTab from "./CasinoTab/CasinoTab";
 import IntCasino from "./InCasinoTab/IntCasino";
 import { useLocation } from "react-router-dom";
+import images from "../../assets/images";
 
 const Casino = () => {
   const location = useLocation();
@@ -16,33 +16,16 @@ const Casino = () => {
     }
   }, [category]);
   return (
-    <div _nghost-hot-c97>
-      <div _ngcontent-hot-c97 className="main-content">
-        <div _ngcontent-hot-c97 className="position-relative">
-          <div
-            _ngcontent-hot-c97
-            type="tabs game-nav-bar"
-            _nghost-hot-c46
-            className="tab-container"
-          >
+    <div>
+      <div className="main-content">
+        <div className="position-relative">
+          <div type="tabs game-nav-bar" className="tab-container">
             <Header />
-            <div _ngcontent-hot-c46 className="tab-content">
-              <div
-                _ngcontent-hot-c97
-                heading="Casino"
-                role="tabpanel"
-                aria-labelledby
-                className="tab-pane active"
-              >
-                <div _ngcontent-hot-c97 id="home" className="tab-pane sports">
-                  <div
-                    _ngcontent-hot-c97
-                    type="tabs game-nav-bar"
-                    _nghost-hot-c46
-                    className="tab-container"
-                  >
+            <div className="tab-content">
+              <div role="tabpanel" aria-labelledby className="tab-pane active">
+                <div id="home" className="tab-pane sports">
+                  <div type="tabs game-nav-bar" className="tab-container">
                     <ul
-                      _ngcontent-hot-c46
                       role="tablist"
                       className="nav nav-tabs game-nav-bar"
                       aria-label="Tabs"
@@ -50,13 +33,11 @@ const Casino = () => {
                       <li
                         style={{ color: "white" }}
                         onClick={() => setTab("casino")}
-                        _ngcontent-hot-c46
                         className={`nav-item ${
                           tab === "casino" ? "active" : ""
                         }`}
                       >
                         <a
-                          _ngcontent-hot-c46
                           role="tab"
                           className={`nav-link ${
                             tab === "casino" ? "active" : ""
@@ -65,27 +46,21 @@ const Casino = () => {
                           aria-selected="true"
                           id
                         >
-                          <span _ngcontent-hot-c46 />
-                          <div _ngcontent-hot-c97>
-                            <img
-                              _ngcontent-hot-c97
-                              alt=""
-                              src="assets/img/99999.png"
-                            />
+                          <span />
+                          <div>
+                            <img alt="" src={images.casino} />
                           </div>
-                          <div _ngcontent-hot-c97>Casino</div>
+                          <div>Casino</div>
                         </a>
                       </li>
                       <li
                         style={{ color: "white" }}
                         onClick={() => setTab("intCasino")}
-                        _ngcontent-hot-c46
                         className={`nav-item ${
                           tab === "intCasino" ? "active" : ""
                         }`}
                       >
                         <a
-                          _ngcontent-hot-c46
                           role="tab"
                           className={`nav-link ${
                             tab === "intCasino" ? "active" : ""
@@ -94,15 +69,11 @@ const Casino = () => {
                           aria-selected="false"
                           id
                         >
-                          <span _ngcontent-hot-c46 />
-                          <div _ngcontent-hot-c97>
-                            <img
-                              _ngcontent-hot-c97
-                              alt=""
-                              src="assets/img/99998.png"
-                            />
+                          <span />
+                          <div>
+                            <img alt="" src={images.int_casino} />
                           </div>
-                          <div _ngcontent-hot-c97>Int Casino</div>
+                          <div>Int Casino</div>
                         </a>
                       </li>
                     </ul>

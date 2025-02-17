@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  group: 0,
+  group: 4,
+  homeTab: "inPlay",
 };
 
 const stateSlice = createSlice({
@@ -11,9 +12,12 @@ const stateSlice = createSlice({
     setGroup: (state, action) => {
       state.group = action.payload;
     },
+    setHomeTab: (state, action) => {
+      state.homeTab = action.payload;
+    },
   },
 });
 
-export const { setGroup } = stateSlice.actions;
+export const { setGroup, setHomeTab } = stateSlice.actions;
 
 export default stateSlice.reducer;

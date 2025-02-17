@@ -1,9 +1,13 @@
 /* eslint-disable react/no-unknown-property */
 
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
+import { setHomeTab } from "../../../redux/features/global/globalSlice";
 
 const Header = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const { homeTab } = useSelector((state) => state.global);
   return (
     <ul
       _ngcontent-htq-c46
@@ -13,10 +17,13 @@ const Header = () => {
     >
       <li _ngcontent-htq-c46 className="active nav-item">
         <Link
+          onClick={() => dispatch(setHomeTab("inPlay"))}
           _ngcontent-htq-c46
           to="/"
           role="tab"
-          className={`nav-link  ${location.pathname === "/" ? "active" : ""}`}
+          className={`nav-link  ${
+            location.pathname === "/" && homeTab === "inPlay" ? "active" : ""
+          }`}
           aria-controls
           aria-selected="true"
           id
@@ -26,10 +33,13 @@ const Header = () => {
       </li>
       <li _ngcontent-htq-c46 className="nav-item">
         <Link
+          onClick={() => dispatch(setHomeTab("sports"))}
           _ngcontent-htq-c46
-          to="/sports"
+          to="/"
           role="tab"
-          className="nav-link"
+          className={`nav-link  ${
+            location.pathname === "/" && homeTab === "sports" ? "active" : ""
+          }`}
           aria-controls
           aria-selected="false"
           id

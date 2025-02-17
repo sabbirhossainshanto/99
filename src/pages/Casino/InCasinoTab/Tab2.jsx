@@ -63,7 +63,7 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
                 <img
                   _ngcontent-hot-c96
                   className="img-fluid"
-                  src={`/src/assets/icon/${category
+                  src={`/m/src/assets/icon/${category
                     ?.split(" ")
                     .join("")
                     .toLowerCase()}.svg`}

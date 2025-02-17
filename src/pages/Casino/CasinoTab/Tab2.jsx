@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 
+import images from "../../../assets/images";
+
 const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
   return (
     <ul
@@ -28,11 +30,7 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
         >
           <span _ngcontent-hot-c46 />
           <span _ngcontent-hot-c96 tabIndex={0} id="childCasino-0-0">
-            <img
-              _ngcontent-hot-c96
-              className="img-fluid"
-              src="https://tezcdn.io/casino/int-casino-icon/all.webp"
-            />
+            <img _ngcontent-hot-c96 className="img-fluid" src={images.all} />
             All
           </span>
         </a>
@@ -63,7 +61,7 @@ const Tab2 = ({ categories, setSelectedSubCategory, selectedSubCategory }) => {
                 <img
                   _ngcontent-hot-c96
                   className="img-fluid"
-                  src={`/src/assets/icon/${category
+                  src={`/m/src/assets/icon/${category
                     ?.split(" ")
                     .join("")
                     .toLowerCase()}.svg`}
