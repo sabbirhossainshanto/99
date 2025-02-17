@@ -51,10 +51,30 @@ export const eventsApi = baseApi.injectEndpoints({
         };
       },
     }),
+    editButtonValues: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.buttonValue}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
+    searchEvent: builder.mutation({
+      query: (payload) => {
+        return {
+          url: `${API.searchEvent}`,
+          method: "POST",
+          body: payload,
+        };
+      },
+    }),
   }),
 });
 
 export const {
+  useSearchEventMutation,
+  useEditButtonValuesMutation,
   useGetEventDetailsQuery,
   useOrderMutation,
   useGroupQuery,

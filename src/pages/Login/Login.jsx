@@ -33,13 +33,19 @@ const Login = () => {
       const user = data?.result?.loginName;
       const game = data?.result?.buttonValue?.game;
       const memberId = data?.result?.memberId;
+      const modal = {
+        banner: data?.result?.banner,
+        bannerTitle: data?.result?.bannerTitle,
+      };
+
       dispatch(setUser({ user, token }));
       localStorage.setItem("memberId", memberId);
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("token", token);
       localStorage.setItem("bonusToken", bonusToken);
+      localStorage.setItem("modal", JSON.stringify(modal));
       if (data?.result?.changePassword) {
-        navigate("/change-password");
+        navigate("/change-password-login");
       } else {
         navigate("/");
         toast.success("Login Successful");
@@ -65,11 +71,15 @@ const Login = () => {
       const bonusToken = result?.result?.bonusToken;
       const user = result?.result?.loginName;
       const game = result?.result?.buttonValue?.game;
+      const modal = {
+        banner: result?.result?.banner,
+        bannerTitle: result?.result?.bannerTitle,
+      };
 
       dispatch(setUser({ user, token }));
       localStorage.setItem("buttonValue", JSON.stringify(game));
       localStorage.setItem("token", token);
-
+      localStorage.setItem("modal", JSON.stringify(modal));
       localStorage.setItem("bonusToken", bonusToken);
       if (token && user) {
         navigate("/");
@@ -81,7 +91,11 @@ const Login = () => {
   };
   return (
     <div _nghost-wjb-c42>
-      <div _ngcontent-wjb-c42 className="login-wrapper">
+      <div
+        _ngcontent-wjb-c42
+        className="login-wrapper"
+        style={{ flexWrap: "nowrap" }}
+      >
         <div _ngcontent-wjb-c42 className="text-center logo-login mb-3">
           <img
             onClick={() => navigate("/")}

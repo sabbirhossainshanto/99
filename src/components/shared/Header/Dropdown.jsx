@@ -2,7 +2,7 @@
 
 import { useDispatch } from "react-redux";
 import { logout } from "../../../redux/features/auth/authSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dropdown = ({ showDropdown }) => {
   const dispatch = useDispatch();
@@ -16,61 +16,57 @@ const Dropdown = ({ showDropdown }) => {
       _ngcontent-htq-c82
       className={`dropdown-menu  ${showDropdown ? "show" : ""}`}
     >
-      <a
+      <Link
         _ngcontent-htq-c82
-        href="/m/home"
+        to="/"
         className="dropdown-item router-link-exact-active router-link-active"
       >
         Home
-      </a>
-      <a
+      </Link>
+      <Link
         _ngcontent-htq-c82
-        href="/m/reports/account-statement"
+        to="/reports/account-statement"
         className="dropdown-item"
       >
         Account Statement
-      </a>
-      <a
+      </Link>
+      <Link
         _ngcontent-htq-c82
-        href="/m/reports/profit-loss"
+        to="/reports/profit-loss"
         className="dropdown-item"
       >
         Profit Loss Report
-      </a>
-      <a
+      </Link>
+      <Link
         _ngcontent-htq-c82
-        href="/m/reports/bet-history"
+        to="/reports/bet-history"
         className="dropdown-item"
       >
         Bet History
-      </a>
-      <a
+      </Link>
+      <Link
         _ngcontent-htq-c82
-        href="/m/reports/unsettled-bets"
+        to="/reports/unsettled-bets"
         className="dropdown-item"
       >
         Unsetteled Bet
-      </a>
-      <a
-        _ngcontent-htq-c82
-        href="/m/change-btn-value"
-        className="dropdown-item"
-      >
+      </Link>
+      <Link _ngcontent-htq-c82 to="change-btn-value" className="dropdown-item">
         Set Button Values
-      </a>
-      <a _ngcontent-htq-c82 href="/m/change-password" className="dropdown-item">
+      </Link>
+      <Link _ngcontent-htq-c82 to="/change-password" className="dropdown-item">
         Change Password
-      </a>
-      <a _ngcontent-htq-c82 href="/m/rules" className="dropdown-item">
+      </Link>
+      <Link _ngcontent-htq-c82 to="/rules" className="dropdown-item">
         Rule
-      </a>
-      <a
+      </Link>
+      <Link
         _ngcontent-htq-c82
         onClick={handleLogout}
         className="dropdown-item mt-2 text-danger"
       >
         <b _ngcontent-htq-c82>Logout</b>
-      </a>
+      </Link>
     </div>
   );
 };

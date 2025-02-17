@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { ApiContext } from "../../../context/ApiProvider";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHome, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 import LatestEvent from "./LatestEvent";
 import { useLatestEvent } from "../../../hooks/latestEvent";
 import Notification from "./Notification";
@@ -10,14 +10,22 @@ import useBalance from "../../../hooks/balance";
 import { useSelector } from "react-redux";
 import Dropdown from "./Dropdown";
 import images from "../../../assets/images";
+import useCloseModalClickOutside from "../../../hooks/closeModal";
+import Search from "./Search";
 
 /* eslint-disable react/no-unknown-property */
 const Header = () => {
+  const dropdownRef = useRef();
+
   const { user } = useSelector((state) => state.auth);
   const { data: balance } = useBalance();
   const { logo } = useContext(ApiContext);
   const { data } = useLatestEvent();
   const [showDropdown, setShowDropdown] = useState(false);
+
+  useCloseModalClickOutside(dropdownRef, () => {
+    setShowDropdown(false);
+  });
 
   return (
     <div _ngcontent-htq-c85 _nghost-htq-c82>
@@ -62,8 +70,8 @@ const Header = () => {
                   <u _ngcontent-htq-c82>Exp: {balance?.deductedExposure}</u>
                 </span>
                 <div
-                  onMouseOver={() => setShowDropdown(true)}
-                  onMouseOut={() => setShowDropdown(false)}
+                  ref={dropdownRef}
+                  onClick={() => setShowDropdown((prev) => !prev)}
                   _ngcontent-htq-c82
                   className="dropdown d-inline-block"
                 >
@@ -108,41 +116,8 @@ const Header = () => {
           </div>
           <div _ngcontent-htq-c82 className="row row5 header-bottom">
             <div _ngcontent-htq-c82 className="col-12">
-              <div _ngcontent-htq-c82 className="search-box-container">
-                <div _ngcontent-htq-c82 className="search-box float-left">
-                  <input
-                    _ngcontent-htq-c82
-                    type="text"
-                    typeaheadoptionfield="name"
-                    className="search_input ng-untouched ng-pristine ng-valid"
-                    aria-expanded="false"
-                    aria-autocomplete="list"
-                  />
-                  <a
-                    _ngcontent-htq-c82
-                    href="javascript:void(0)"
-                    className="search_icon"
-                  >
-                    <FontAwesomeIcon
-                      style={{ color: "black" }}
-                      icon={faSearch}
-                      size="20"
-                    />
-                    {/* <i _ngcontent-htq-c82 className="fas fa-search" /> */}
-                  </a>
-                </div>
-                <div _ngcontent-htq-c82 className="search-col d-none">
-                  <form
-                    _ngcontent-htq-c82
-                    noValidate
-                    action
-                    className="ng-untouched ng-pristine ng-valid"
-                  >
-                    <input _ngcontent-htq-c82 text="search" />
-                    <i _ngcontent-htq-c82 className="fa fa-search" />
-                  </form>
-                </div>
-              </div>
+              <Search />
+
               <Notification />
             </div>
           </div>

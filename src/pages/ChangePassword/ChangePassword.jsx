@@ -1,163 +1,86 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { ApiContext } from "../../context/ApiProvider";
-import toast from "react-hot-toast";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHandPointDown } from "@fortawesome/free-solid-svg-icons";
 import { useChangePasswordMutation } from "../../redux/features/auth/authApi";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-const ChangePasswordLogin = () => {
-  const { logo } = useContext(ApiContext);
+const ChangePassword = () => {
   const navigate = useNavigate();
   const [handleChangePassword] = useChangePasswordMutation();
+  const { register, handleSubmit } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  /* Change password login api */
-  const onSubmit = async ({ password, newPassword, newPasswordConfirm }) => {
+  const onSubmit = async ({ password, oldPassword, passVerify }) => {
     const payload = {
-      oldPassword: password,
-      password: newPassword,
-      passVerify: newPasswordConfirm,
+      oldPassword,
+      password,
+      passVerify,
     };
-    const data = await handleChangePassword(payload);
+    const data = await handleChangePassword(payload).unwrap();
     if (data.success) {
       toast.success(data?.result?.message);
       localStorage.clear();
       navigate("/login");
     } else {
-      toast.error(data?.error?.oldPassword[0]?.description);
+      toast.error(data?.error?.errorMessage);
     }
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-page">
-        <div className="login-box">
-          <Link to="/" className="logo-login">
-            <img src={logo} />
-          </Link>
-          <div className="login-form mt-4">
-            <h4 className="text-center login-title">
-              LOGIN <FontAwesomeIcon icon={faHandPointDown} className="ml-2" />
-            </h4>
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="login-chage-pass"
-            >
-              <div className="row row10">
-                <div
-                  className="mb-3 position-relative "
-                  style={{ width: "100%" }}
-                >
-                  <label className="form-label text-start w-100">
-                    Current Password:
-                  </label>
-                  <input
-                    {...register("password", { required: true })}
-                    name="password"
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter Current password"
-                  />
-                  {errors.password?.type === "required" && (
-                    <p
-                      style={{ marginLeft: "8px", color: "red" }}
-                      className="error-form"
-                    >
-                      Current Password is required.
-                    </p>
-                  )}
+    <div className="ng-star-inserted">
+      <div className="ng-star-inserted">
+        <div className="report-container">
+          <div className="card">
+            <div className="card-header">
+              <h4 className="mb-0">Change Password</h4>
+            </div>
+            <div className="card-body container-fluid container-fluid-5">
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="ng-untouched ng-pristine ng-invalid"
+              >
+                <div className="row row5 mt-2">
+                  <div className="col-12">
+                    <div className="form-group">
+                      <label>Current Password</label>
+                      <input
+                        {...register("oldPassword", { required: true })}
+                        type="password"
+                        className="form-control ng-untouched ng-pristine ng-invalid"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>New Password</label>
+                      <input
+                        {...register("password", {
+                          required: true,
+                        })}
+                        type="password"
+                        className="form-control ng-untouched ng-pristine ng-invalid"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label>Confirm New Password</label>
+                      <input
+                        {...register("passVerify", {
+                          required: true,
+                        })}
+                        type="password"
+                        className="form-control ng-untouched ng-pristine ng-invalid"
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="row row10">
-                <div
-                  className="mb-3 position-relative"
-                  style={{ width: "100%" }}
-                >
-                  <label className="form-label text-start w-100">
-                    New Password:
-                  </label>
-                  <input
-                    {...register("newPassword", {
-                      required: true,
-                      pattern: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/,
-                    })}
-                    name="newPassword"
-                    type="password"
-                    className="form-control"
-                    placeholder="Enter New Password"
-                    aria-autocomplete="list"
-                  />
-                  {errors.newPassword?.type === "required" && (
-                    <p
-                      style={{ marginLeft: "8px", color: "red" }}
-                      className="error-form"
+                <div className="row row5 mt-2">
+                  <div className="col-12">
+                    <button
+                      type="submit"
+                      className="btn btn-primary btn-block btn-sm"
                     >
-                      New Password is required.
-                    </p>
-                  )}
-                  {errors.newPassword?.type === "pattern" && (
-                    <p
-                      style={{ marginLeft: "8px", color: "red" }}
-                      className="error-form"
-                    >
-                      New Password must contain at least: 1 uppercase letter, 1
-                      lowercase letter, 1 number
-                    </p>
-                  )}
+                      Change Password
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="row row10">
-                <div
-                  className="mb-4 position-relative"
-                  style={{ width: "100%" }}
-                >
-                  <label className="form-label text-start w-100">
-                    Confirm Password:
-                  </label>
-                  <input
-                    {...register("newPasswordConfirm", {
-                      required: true,
-                      pattern: /(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])/,
-                    })}
-                    name="newPasswordConfirm"
-                    type="password"
-                    className="form-control"
-                    placeholder="Confirm New Password"
-                  />
-                  {errors.newPasswordConfirm?.type === "required" && (
-                    <p
-                      style={{ marginLeft: "8px", color: "red" }}
-                      className="error-form"
-                    >
-                      New Password Confirmation is required.
-                    </p>
-                  )}
-                  {errors.newPasswordConfirm?.type === "pattern" && (
-                    <p
-                      style={{ marginLeft: "8px", color: "red" }}
-                      className="error-form"
-                    >
-                      New Password Confirmation must contain at least: 1
-                      uppercase letter, 1 lowercase letter, 1 number
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="row row10">
-                <div className="mb-3" style={{ width: "100%" }}>
-                  <button type="submit" className="btn btn-primary btn-block">
-                    Change Password
-                  </button>
-                </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -165,4 +88,4 @@ const ChangePasswordLogin = () => {
   );
 };
 
-export default ChangePasswordLogin;
+export default ChangePassword;

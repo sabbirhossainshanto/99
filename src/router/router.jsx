@@ -6,9 +6,12 @@ import Login from "../pages/Login/Login";
 import Casino from "../pages/Casino/Casino";
 import CasinoIFrame from "../pages/CasinoIFrame/CasinoIFrame";
 import Register from "../pages/Register/Register";
-import ChangePassword from "../pages/ChangePassword/ChangePassword";
+
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword";
 import Deposit from "../pages/Deposit/Deposit";
+import ChangePasswordLogin from "../pages/ChangePasswordLogin/ChangePasswordLogin";
+import ChangePassword from "../pages/ChangePassword/ChangePassword";
+import ChangeButtonValue from "../pages/ChangeButtonValue/ChangeButtonValue";
 
 export const router = createBrowserRouter(
   [
@@ -28,6 +31,14 @@ export const router = createBrowserRouter(
           path: "/casino",
           element: <Casino />,
         },
+        {
+          path: "/change-password",
+          element: <ChangePassword />,
+        },
+        {
+          path: "/change-btn-value",
+          element: <ChangeButtonValue />,
+        },
       ],
     },
     {
@@ -39,8 +50,8 @@ export const router = createBrowserRouter(
       element: <Register />,
     },
     {
-      path: "/change-password",
-      element: <ChangePassword />,
+      path: "/change-password-login",
+      element: <ChangePasswordLogin />,
     },
     {
       path: "/forgot-password",

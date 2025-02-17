@@ -9,6 +9,7 @@ const LatestEvent = ({ latestEvent }) => {
         {latestEvent?.map((event) => {
           return (
             <div
+              style={{ width: "100%" }}
               key={event?.eventId}
               _ngcontent-htq-c80
               className="latest-event-item"
