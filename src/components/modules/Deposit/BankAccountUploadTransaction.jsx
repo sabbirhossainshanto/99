@@ -166,13 +166,13 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                         {method?.type == "upi" || method?.type == "pg" ? (
                           <img
                             style={{ height: "20px", width: "20px" }}
-                            src={"/src/assets/icon/upi.png"}
+                            src={"/m/src/assets/icon/upi.png"}
                           />
                         ) : null}
                         {method?.type == "usdt" ? (
                           <img
                             style={{ height: "20px", width: "20px" }}
-                            src={"/src/assets/icon/usdt.png"}
+                            src={"/m/src/assets/icon/usdt.png"}
                           />
                         ) : null}
                       </button>

@@ -297,6 +297,7 @@ const MatchOdds = ({ matchOdds }) => {
                       const predictOddValues = predictOdd?.find(
                         (val) => val?.id === runner?.id
                       );
+                      // console.log(runner);
 
                       return (
                         <div

@@ -244,7 +244,7 @@ const EventDetails = () => {
     // value?.toFixed(2)
     return hasDecimal ? parseFloat(value?.toFixed(2)) : value;
   };
-
+  // console.log(data);
   return (
     <div _ngcontent-bym-c104 className="main-content">
       <div
@@ -364,7 +364,7 @@ const EventDetails = () => {
           )}
           {tab === "matchedBet" && <CurrentBets currentBet={currentBet} />}
         </div>
-        {data?.result?.[0]?.hasVideo && (
+        {data?.score?.hasVideo && (
           <div _ngcontent-bym-c104 className="tv-icon">
             <p _ngcontent-bym-c104 className="mb-0">
               <a

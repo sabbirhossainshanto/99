@@ -146,15 +146,12 @@ const BetSlip = () => {
           <div _ngcontent-ukj-c63="" id="goto-1.238886397-1006">
             {loading && (
               <div
+                style={{ position: "absolute" }}
                 _ngcontent-ukj-c63=""
                 id="loadInner"
                 class="ng-star-inserted"
               >
-                <div
-                  _ngcontent-ukj-c63=""
-                  id="load-inner"
-                  style={{ position: "relative" }}
-                >
+                <div _ngcontent-ukj-c63="" id="load-inner">
                   <FontAwesomeIcon
                     style={{ fontSize: "23px" }}
                     icon={faSpinner}
