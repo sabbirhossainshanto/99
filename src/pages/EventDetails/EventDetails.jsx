@@ -285,7 +285,8 @@ const EventDetails = () => {
                         style={{
                           width: "100%",
                           position: "relative",
-                          height: "180px",
+                          // height: "180px",
+                          paddingBottom: "56.25%",
                         }}
                         _ngcontent-bym-c104
                         id="collapseBasic"
