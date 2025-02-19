@@ -300,198 +300,224 @@ const MatchOdds = ({ matchOdds }) => {
                       // console.log(runner);
 
                       return (
-                        <div
-                          style={{ height: "37px" }}
-                          key={runner?.id}
-                          _ngcontent-bym-c100
-                          className={`table-row ${
-                            runner?.status === Status.SUSPENDED
-                              ? "suspended"
-                              : ""
-                          } `}
-                          data-title={` ${
-                            runner?.status === Status.SUSPENDED
-                              ? "suspended"
-                              : ""
-                          }`}
-                        >
+                        <>
                           <div
+                            style={{ height: "37px" }}
+                            key={runner?.id}
                             _ngcontent-bym-c100
-                            className="float-left country-name box-4"
+                            className={`table-row ${
+                              runner?.status === Status.SUSPENDED
+                                ? "suspended"
+                                : ""
+                            } `}
+                            data-title={` ${
+                              runner?.status === Status.SUSPENDED
+                                ? "suspended"
+                                : ""
+                            }`}
                           >
-                            <span _ngcontent-bym-c100 className="team-name">
-                              <b _ngcontent-bym-c100>{runner?.name}</b>
-                            </span>
+                            <div
+                              _ngcontent-bym-c100
+                              className="float-left country-name box-4"
+                            >
+                              <span _ngcontent-bym-c100 className="team-name">
+                                <b _ngcontent-bym-c100>{runner?.name}</b>
+                              </span>
 
-                            {pnl && (
-                              <p _ngcontent-gdr-c100="" class="mob-expo-cs">
-                                <span _ngcontent-gdr-c100="" class="float-left">
+                              {pnl && (
+                                <p _ngcontent-gdr-c100="" class="mob-expo-cs">
                                   <span
                                     _ngcontent-gdr-c100=""
-                                    class={` ${
-                                      pnl?.pnl > 0 ? "text-green" : "text-red"
-                                    }`}
+                                    class="float-left"
                                   >
-                                    {" "}
-                                    {pnl?.pnl}
+                                    <span
+                                      _ngcontent-gdr-c100=""
+                                      class={` ${
+                                        pnl?.pnl > 0 ? "text-green" : "text-red"
+                                      }`}
+                                    >
+                                      {" "}
+                                      {pnl?.pnl}
+                                    </span>
                                   </span>
-                                </span>
-                              </p>
-                            )}
-                            {stake && runnerId && predictOddValues && (
-                              <p
-                                key={predictOddValues?.id}
-                                _ngcontent-gdr-c100=""
-                                class="mob-expo-cs"
-                              >
-                                <span _ngcontent-gdr-c100="" class="float-left">
-                                  <b
+                                </p>
+                              )}
+                              {stake && runnerId && predictOddValues && (
+                                <p
+                                  key={predictOddValues?.id}
+                                  _ngcontent-gdr-c100=""
+                                  class="mob-expo-cs"
+                                >
+                                  <span
                                     _ngcontent-gdr-c100=""
-                                    class={` ${
-                                      predictOddValues?.odd > 0
-                                        ? "text-green"
-                                        : "text-red"
-                                    }`}
+                                    class="float-left"
                                   >
-                                    &nbsp;({predictOddValues?.odd})
-                                  </b>
-                                </span>
-                              </p>
-                            )}
-                          </div>
+                                    <b
+                                      _ngcontent-gdr-c100=""
+                                      class={` ${
+                                        predictOddValues?.odd > 0
+                                          ? "text-green"
+                                          : "text-red"
+                                      }`}
+                                    >
+                                      &nbsp;({predictOddValues?.odd})
+                                    </b>
+                                  </span>
+                                </p>
+                              )}
+                            </div>
 
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "back",
-                                games,
-                                runner,
-                                runner?.back[2]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="back-1 back1 blink box-1 float-left hidden-portrait text-center"
-                          >
-                            <button _ngcontent-bym-c100>
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.back[2]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.back[2]?.size}
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "back",
-                                games,
-                                runner,
-                                runner?.back[1]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="back-2 back2 blink box-1 float-left hidden-portrait text-center"
-                          >
-                            <button _ngcontent-bym-c100>
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.back?.[1]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.back?.[1]?.size}
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "back",
-                                games,
-                                runner,
-                                runner?.back[0]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="back blink box-1 float-left lock text-center"
-                          >
-                            <button
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "back",
+                                  games,
+                                  runner,
+                                  runner?.back[2]?.price
+                                )
+                              }
                               _ngcontent-bym-c100
-                              data-toggle="modal"
-                              data-target="#Placebet"
+                              className="back-1 back1 blink box-1 float-left hidden-portrait text-center"
                             >
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.back?.[0]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.back?.[0]?.size}
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "lay",
-                                games,
-                                runner,
-                                runner?.lay[0]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="blink box-1 float-left lay text-center"
-                          >
-                            <button _ngcontent-bym-c100>
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.lay?.[0]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.lay?.[0]?.size}
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "lay",
-                                games,
-                                runner,
-                                runner?.lay?.[1]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="blink box-1 float-left hidden-portrait lay-2 text-center"
-                          >
-                            <button _ngcontent-bym-c100>
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.lay?.[1]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.lay?.[1]?.size}
-                              </span>
-                            </button>
-                          </div>
-                          <div
-                            onClick={() =>
-                              handleBetSlip(
-                                "lay",
-                                games,
-                                runner,
-                                runner?.lay?.[2]?.price
-                              )
-                            }
-                            _ngcontent-bym-c100
-                            className="blink box-1 float-left hidden-portrait lay-1 text-center"
-                          >
-                            <button _ngcontent-bym-c100>
-                              <span _ngcontent-bym-c100 className="odd d-block">
-                                {runner?.lay?.[2]?.price}
-                              </span>
-                              <span _ngcontent-bym-c100 className="d-block">
-                                {runner?.lay?.[2]?.size}
-                              </span>
-                            </button>
+                              <button _ngcontent-bym-c100>
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.back[2]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.back[2]?.size}
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "back",
+                                  games,
+                                  runner,
+                                  runner?.back[1]?.price
+                                )
+                              }
+                              _ngcontent-bym-c100
+                              className="back-2 back2 blink box-1 float-left hidden-portrait text-center"
+                            >
+                              <button _ngcontent-bym-c100>
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.back?.[1]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.back?.[1]?.size}
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "back",
+                                  games,
+                                  runner,
+                                  runner?.back[0]?.price
+                                )
+                              }
+                              _ngcontent-bym-c100
+                              className="back blink box-1 float-left lock text-center"
+                            >
+                              <button
+                                _ngcontent-bym-c100
+                                data-toggle="modal"
+                                data-target="#Placebet"
+                              >
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.back?.[0]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.back?.[0]?.size}
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "lay",
+                                  games,
+                                  runner,
+                                  runner?.lay[0]?.price
+                                )
+                              }
+                              _ngcontent-bym-c100
+                              className="blink box-1 float-left lay text-center"
+                            >
+                              <button _ngcontent-bym-c100>
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.lay?.[0]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.lay?.[0]?.size}
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "lay",
+                                  games,
+                                  runner,
+                                  runner?.lay?.[1]?.price
+                                )
+                              }
+                              _ngcontent-bym-c100
+                              className="blink box-1 float-left hidden-portrait lay-2 text-center"
+                            >
+                              <button _ngcontent-bym-c100>
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.lay?.[1]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.lay?.[1]?.size}
+                                </span>
+                              </button>
+                            </div>
+                            <div
+                              onClick={() =>
+                                handleBetSlip(
+                                  "lay",
+                                  games,
+                                  runner,
+                                  runner?.lay?.[2]?.price
+                                )
+                              }
+                              _ngcontent-bym-c100
+                              className="blink box-1 float-left hidden-portrait lay-1 text-center"
+                            >
+                              <button _ngcontent-bym-c100>
+                                <span
+                                  _ngcontent-bym-c100
+                                  className="odd d-block"
+                                >
+                                  {runner?.lay?.[2]?.price}
+                                </span>
+                                <span _ngcontent-bym-c100 className="d-block">
+                                  {runner?.lay?.[2]?.size}
+                                </span>
+                              </button>
+                            </div>
                           </div>
                           {runnerId === runner?.id && <BetSlip />}
-                        </div>
+                        </>
                       );
                     })}
                   </div>

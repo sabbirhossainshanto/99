@@ -131,6 +131,7 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                   }}
                 >
                   {data?.result?.map((method) => {
+                    console.log(method);
                     return (
                       <button
                         onClick={() => handleVisibleBankMethod(method)}
