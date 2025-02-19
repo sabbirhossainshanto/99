@@ -23,8 +23,18 @@ import casino from "../img/99999.png";
 import int_casino from "../img/99998.png";
 import all from "../icon/all.svg";
 import landMark from "../img/landmark-icon.webp";
+import star from "../icon/star.svg";
+import back from "../icon/back-arrow.svg";
+import bankPicture from "../icon/bankPicture.svg";
+import deleteIcon from "../icon/delete-icon.svg";
+import edit from "../icon/edit.svg";
 
 export default {
+  edit,
+  deleteIcon,
+  bankPicture,
+  back,
+  star,
   landMark,
   int_casino,
   casino,

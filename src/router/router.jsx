@@ -17,6 +17,7 @@ import Rules from "../pages/Rules/Rules";
 import SportsBook from "../pages/SportsBook/SportsBook";
 import Other from "../pages/Other/Other";
 import PrivateRoute from "./PrivateRoute";
+import Withdraw from "../pages/Withdraw/Withdraw";
 
 export const router = createBrowserRouter(
   [
@@ -90,6 +91,10 @@ export const router = createBrowserRouter(
     {
       path: "/deposit",
       element: <Deposit />,
+    },
+    {
+      path: "/withdraw",
+      element: <Withdraw />,
     },
     {
       path: "/sports-book",

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   group: 4,
   homeTab: "inPlay",
+  addBank: false,
 };
 
 const stateSlice = createSlice({
@@ -15,9 +16,12 @@ const stateSlice = createSlice({
     setHomeTab: (state, action) => {
       state.homeTab = action.payload;
     },
+    setAddBank: (state, action) => {
+      state.addBank = action.payload;
+    },
   },
 });
 
-export const { setGroup, setHomeTab } = stateSlice.actions;
+export const { setGroup, setHomeTab, setAddBank } = stateSlice.actions;
 
 export default stateSlice.reducer;

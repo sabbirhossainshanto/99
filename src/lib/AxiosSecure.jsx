@@ -1,4 +1,7 @@
 import axios from "axios";
+import handleRandomToken from "../utils/handleRandomToken";
+import { Settings } from "../api";
+import handleEncryptData from "../utils/handleEncryptData";
 
 export const AxiosSecure = axios.create({
   baseURL: "",
@@ -13,11 +16,19 @@ AxiosSecure.interceptors.request.use(
       config.headers.Authorization = `Bearer ${token}`;
     }
     if (config?.method === "post") {
-      const payload = {
-        ...config.data,
-      };
+      const generatedToken = handleRandomToken();
 
-      config.data = payload;
+      let payload = {
+        ...config.data,
+        token: generatedToken,
+        site: Settings.siteUrl,
+      };
+      if (Settings.language) {
+        payload.language = localStorage.getItem("language") || "english";
+      }
+
+      const encryptedData = handleEncryptData(payload);
+      config.data = encryptedData;
     }
     return config;
   },
