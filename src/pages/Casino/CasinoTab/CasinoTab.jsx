@@ -86,9 +86,17 @@ const CasinoTab = () => {
       >
         <div _ngcontent-hot-c97 _nghost-hot-c96>
           <div _ngcontent-hot-c96 className="casino-tables">
-            <div _ngcontent-hot-c96 className="container-fluid">
+            <div
+              _ngcontent-hot-c96
+              className="container-fluid "
+              style={{ marginLeft: "5px", marginRight: "5px" }}
+            >
               <div _ngcontent-hot-c96 className="row row5 mt-2">
-                <div _ngcontent-hot-c96 className="col-md-12">
+                <div
+                  _ngcontent-hot-c96
+                  className="col-md-12"
+                  style={{ paddingRight: "5px", paddingLeft: "5px" }}
+                >
                   <div
                     _ngcontent-hot-c96
                     className="int-casino tab-container"

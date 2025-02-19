@@ -18,7 +18,11 @@ const CasinoThumbnail = ({ casinoData }) => {
         aria-labelledby="goto-c-casino-0-link"
         className="tab-pane active"
       >
-        <div _ngcontent-hot-c96 className="row row5 mt-2">
+        <div
+          _ngcontent-hot-c96
+          className="row row5 mt-2"
+          style={{ marginLeft: "0px", marginRight: "10px" }}
+        >
           {casinoData?.map((casino) => {
             return (
               <div
@@ -26,6 +30,7 @@ const CasinoThumbnail = ({ casinoData }) => {
                 key={casino?.id}
                 _ngcontent-hot-c96
                 className="col-3 text-center"
+                style={{ padding: "0px" }}
               >
                 <div _ngcontent-hot-c96 className="casinoicons">
                   <a _ngcontent-hot-c96>

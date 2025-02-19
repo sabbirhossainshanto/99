@@ -27,6 +27,8 @@ const Banner = () => {
     <>
       {token && showModal && modal && (
         <div
+          ref={modalRef}
+          onClick={closeModal}
           tabIndex={-1}
           role="dialog"
           aria-labelledby
@@ -36,10 +38,9 @@ const Banner = () => {
           style={{ display: "block" }}
         >
           <div className="modal-dialog bookModal app_version">
-            <div className="modal-content" ref={modalRef}>
+            <div className="modal-content">
               <div className="modal-body p-0">
                 <button
-                  onClick={closeModal}
                   type="button"
                   data-bs-dismiss="modal"
                   aria-label="Close"

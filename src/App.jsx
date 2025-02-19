@@ -29,6 +29,7 @@ function App() {
       });
     }
   }, [navigate, disabledDevtool, dispatch]);
+
   return <MainLayout />;
 }
 

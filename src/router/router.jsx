@@ -16,12 +16,17 @@ import UnSettledBets from "../pages/UnSettledBets/UnSettledBets";
 import Rules from "../pages/Rules/Rules";
 import SportsBook from "../pages/SportsBook/SportsBook";
 import Other from "../pages/Other/Other";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: <App />,
+      element: (
+        <PrivateRoute>
+          <App />
+        </PrivateRoute>
+      ),
       children: [
         {
           index: true,
