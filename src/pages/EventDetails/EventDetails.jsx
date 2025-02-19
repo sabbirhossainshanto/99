@@ -11,12 +11,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  setFirstOdd,
-  setPredictOdd,
-  setSecondOdd,
-  setThirdOdd,
-} from "../../redux/features/events/eventSlice";
+import { setPredictOdd } from "../../redux/features/events/eventSlice";
 import Tab from "../../components/modules/EventDetails/Tab";
 import { useCurrentBets } from "../../hooks/currentBets";
 import CurrentBets from "../../components/modules/EventDetails/CurrentBets";
@@ -66,13 +61,6 @@ const EventDetails = () => {
   }, [eventId, eventTypeId, getIFrame, showIFrame]);
 
   /* Place bet calculate */
-  const pnl1 =
-    placeBetValues?.pnl && placeBetValues?.pnl[0] ? placeBetValues?.pnl[0] : 0;
-  const pnl2 =
-    placeBetValues?.pnl && placeBetValues?.pnl[1] ? placeBetValues?.pnl[1] : 0;
-  const pnl3 =
-    placeBetValues?.pnl && placeBetValues?.pnl[2] ? placeBetValues?.pnl[2] : 0;
-  const selectionId = placeBetValues?.selectionId?.toString();
 
   useEffect(() => {
     if (
@@ -90,67 +78,19 @@ const EventDetails = () => {
           total = bookmaker * stake - stake;
         }
 
-        if (selectionId && selectionId.includes(".1")) {
-          dispatch(setFirstOdd(formatNumber(total + pnl1)));
-          dispatch(setSecondOdd(formatNumber(pnl2 + -1 * stake)));
-          dispatch(setThirdOdd(formatNumber(pnl3 + -1 * stake)));
+        if (stake) {
+          const currentExposure = placeBetValues?.exposure?.map((exp) => {
+            return {
+              exposure: exp?.isBettingOnThisRunner
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(exp?.exposure + stake),
 
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(total + pnl1),
-                id: placeBetValues?.runnerId[0],
-              },
-              {
-                odd: formatNumber(pnl2 + -1 * stake),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(pnl3 + -1 * stake),
-                id: placeBetValues?.runnerId[2],
-              },
-            ])
-          );
-        } else if (selectionId && selectionId.includes(".2")) {
-          dispatch(setFirstOdd(formatNumber(total + pnl2)));
-          dispatch(setSecondOdd(formatNumber(pnl3 + -1 * stake)));
-          dispatch(setThirdOdd(formatNumber(pnl2 + -1 * stake)));
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(pnl2 + -1 * stake),
-                id: placeBetValues?.runnerId[2],
-              },
-              {
-                odd: formatNumber(total + pnl2),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(pnl3 + -1 * stake),
-                id: placeBetValues?.runnerId[0],
-              },
-            ])
-          );
-        } else {
-          dispatch(setFirstOdd(formatNumber(total + pnl3)));
-          dispatch(setSecondOdd(formatNumber(pnl1 + -1 * stake)));
-          dispatch(setThirdOdd(formatNumber(pnl2 + -1 * stake)));
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(pnl1 + -1 * stake),
-                id: placeBetValues?.runnerId[0],
-              },
-              {
-                odd: formatNumber(pnl2 + -1 * stake),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(total + pnl3),
-                id: placeBetValues?.runnerId[2],
-              },
-            ])
-          );
+              id: exp?.id,
+              isBettingOnThisRunner: exp?.isBettingOnThisRunner,
+            };
+          });
+          console.log(currentExposure);
+          dispatch(setPredictOdd(currentExposure));
         }
       } else if (placeBetValues?.lay) {
         let total;
@@ -162,81 +102,21 @@ const EventDetails = () => {
           total = -1 * (bookmaker * stake - stake);
         }
 
-        if (selectionId && selectionId.includes(".1")) {
-          dispatch(setFirstOdd(formatNumber(total + pnl1)));
-          dispatch(setSecondOdd(formatNumber(1 * pnl2 + 1 * stake)));
-          dispatch(setThirdOdd(formatNumber(1 * pnl3 + 1 * stake)));
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(total + pnl1),
-                id: placeBetValues?.runnerId[0],
-              },
-              {
-                odd: formatNumber(formatNumber(1 * pnl2 + 1 * stake)),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(formatNumber(1 * pnl3 + 1 * stake)),
-                id: placeBetValues?.runnerId[2],
-              },
-            ])
-          );
-        } else if (selectionId && selectionId.includes(".2")) {
-          dispatch(setFirstOdd(formatNumber(total + pnl2)));
-          dispatch(setSecondOdd(formatNumber(1 * pnl3 + 1 * stake)));
-          dispatch(setThirdOdd(formatNumber(1 * pnl1 + 1 * stake)));
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(formatNumber(1 * pnl1 + 1 * stake)),
-                id: placeBetValues?.runnerId[2],
-              },
-              {
-                odd: formatNumber(total + pnl2),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(formatNumber(1 * pnl3 + 1 * stake)),
-                id: placeBetValues?.runnerId[0],
-              },
-            ])
-          );
-        } else {
-          dispatch(setFirstOdd(formatNumber(total + pnl3)));
-          dispatch(setSecondOdd(formatNumber(1 * pnl1 + 1 * stake)));
-          dispatch(setThirdOdd(formatNumber(1 * pnl2 + 1 * stake)));
-          dispatch(
-            setPredictOdd([
-              {
-                odd: formatNumber(formatNumber(1 * pnl1 + 1 * stake)),
-                id: placeBetValues?.runnerId[0],
-              },
-              {
-                odd: formatNumber(formatNumber(1 * pnl2 + 1 * stake)),
-                id: placeBetValues?.runnerId[1],
-              },
-              {
-                odd: formatNumber(total + pnl3),
-                id: placeBetValues?.runnerId[2],
-              },
-            ])
-          );
+        if (stake) {
+          const currentExposure = placeBetValues?.exposure?.map((exp) => {
+            return {
+              exposure: exp?.isBettingOnThisRunner
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(exp?.exposure + stake),
+              id: exp?.id,
+              isBettingOnThisRunner: exp?.isBettingOnThisRunner,
+            };
+          });
+          dispatch(setPredictOdd(currentExposure));
         }
       }
-    } else {
-      let total = price * stake - stake;
-
-      dispatch(
-        setPredictOdd([
-          {
-            odd: formatNumber(total + pnl1),
-            id: placeBetValues?.runnerId,
-          },
-        ])
-      );
     }
-  }, [price, stake, placeBetValues, pnl1, pnl2, pnl3, selectionId, dispatch]);
+  }, [price, stake, placeBetValues, dispatch]);
 
   /* Format number */
   const formatNumber = (value) => {

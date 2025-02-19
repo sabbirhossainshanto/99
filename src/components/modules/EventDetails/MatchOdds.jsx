@@ -47,29 +47,45 @@ const MatchOdds = ({ matchOdds }) => {
         selectionId = games?.id;
         runnerId = games?.id;
         eventTypeId = games?.eventTypeId;
-        const pnl = pnlBySelection?.find((p) => p?.RunnerId === games?.id);
-        if (pnl) {
-          updatedPnl.push(pnl?.pnl);
-        }
       } else if (games?.btype && games?.btype !== "FANCY") {
         selectionId = runner?.id;
         runnerId = games.runners.map((runner) => runner.id);
         eventTypeId = games?.eventTypeId;
-        games?.runners?.forEach((runner) => {
-          const pnl = pnlBySelection?.find((p) => p?.RunnerId === runner?.id);
+        games?.runners?.forEach((rnr) => {
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === rnr?.id);
           if (pnl) {
-            updatedPnl.push(pnl?.pnl);
+            updatedPnl.push({
+              exposure: pnl?.pnl,
+              id: pnl?.RunnerId,
+              isBettingOnThisRunner: rnr?.RunnerId === runner?.id,
+            });
+          } else {
+            updatedPnl.push({
+              exposure: 0,
+              id: rnr?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
+            });
           }
         });
       } else {
         selectionId = runner?.selectionId;
         eventTypeId = games?.marketId;
-        games?.runners?.forEach((runner) => {
+        games?.runners?.forEach((rnr) => {
           const pnl = pnlBySelection?.find(
-            (p) => p?.RunnerId === runner?.selectionId
+            (p) => p?.RunnerId === rnr?.selectionId
           );
           if (pnl) {
-            updatedPnl.push(pnl?.pnl);
+            updatedPnl.push({
+              exposure: pnl?.pnl,
+              id: pnl?.RunnerId,
+              isBettingOnThisRunner: rnr?.RunnerId === runner?.id,
+            });
+          } else {
+            updatedPnl.push({
+              exposure: 0,
+              id: rnr?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
+            });
           }
         });
       }
@@ -91,11 +107,12 @@ const MatchOdds = ({ matchOdds }) => {
         maxLiabilityPerMarket: games?.maxLiabilityPerMarket,
         isBettable: games?.isBettable,
         maxLiabilityPerBet: games?.maxLiabilityPerBet,
-        pnl: updatedPnl,
+        exposure: updatedPnl,
         marketName: games?.name,
         eventId: games?.eventId,
         totalSize: 0,
       };
+
       if (games?.btype == "FANCY") {
         dispatch(setRunnerId(games?.id));
       } else if (games?.btype && games?.btype !== "FANCY") {
@@ -212,6 +229,8 @@ const MatchOdds = ({ matchOdds }) => {
     pnlBySelection = Object?.values(obj);
   }
 
+  // console.log(exposure);
+
   return (
     <>
       {showRule && <MarketRule setShowRule={setShowRule} />}
@@ -291,13 +310,13 @@ const MatchOdds = ({ matchOdds }) => {
                   </div>
                   <div _ngcontent-bym-c100 className="table-body">
                     {games?.runners?.map((runner) => {
+                      // console.log(runner);
                       const pnl = pnlBySelection?.find(
                         (pnl) => pnl?.RunnerId === runner?.id
                       );
                       const predictOddValues = predictOdd?.find(
                         (val) => val?.id === runner?.id
                       );
-                      // console.log(runner);
 
                       return (
                         <>
@@ -355,12 +374,12 @@ const MatchOdds = ({ matchOdds }) => {
                                     <b
                                       _ngcontent-gdr-c100=""
                                       class={` ${
-                                        predictOddValues?.odd > 0
+                                        predictOddValues?.exposure > 0
                                           ? "text-green"
                                           : "text-red"
                                       }`}
                                     >
-                                      &nbsp;({predictOddValues?.odd})
+                                      &nbsp;({predictOddValues?.exposure})
                                     </b>
                                   </span>
                                 </p>
