@@ -30,12 +30,7 @@ const Dropdown = ({ showDropdown }) => {
       >
         Account Statement
       </Link>
-      <Link _ngcontent-htq-c82 to="/profit-loss" className="dropdown-item">
-        Profit Loss Report
-      </Link>
-      <Link _ngcontent-htq-c82 to="/bet-history" className="dropdown-item">
-        Bet History
-      </Link>
+
       <Link _ngcontent-htq-c82 to="/unsettled-bets" className="dropdown-item">
         Unsetteled Bet
       </Link>

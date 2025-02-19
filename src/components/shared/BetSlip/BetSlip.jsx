@@ -170,51 +170,57 @@ const BetSlip = () => {
           <div _ngcontent-ukj-c63="" class="row mx-0">
             <div _ngcontent-ukj-c63="" class="col-6">
               <div _ngcontent-ukj-c63="" class="input-group">
-                <div
-                  onClick={() =>
-                    handleDecreasePrice(
-                      price,
-                      placeBetValues,
-                      dispatch,
-                      setPrice
-                    )
-                  }
-                  _ngcontent-ukj-c63=""
-                  class="input-group-prepend"
-                >
-                  <span _ngcontent-ukj-c63="" class="input-group-text">
-                    -
-                  </span>
-                </div>
+                {!placeBetValues?.isWeak && (
+                  <div
+                    onClick={() =>
+                      handleDecreasePrice(
+                        price,
+                        placeBetValues,
+                        dispatch,
+                        setPrice
+                      )
+                    }
+                    _ngcontent-ukj-c63=""
+                    class="input-group-prepend"
+                  >
+                    <span _ngcontent-ukj-c63="" class="input-group-text">
+                      -
+                    </span>
+                  </div>
+                )}
+
                 <input
+                  onChange={(e) => dispatch(setPrice(e.target.value))}
                   _ngcontent-ukj-c63=""
                   type="number"
-                  readonly="readonly"
                   min="1.01"
                   max="999.99"
                   class="form-control ng-untouched ng-pristine ng-valid"
                   value={price}
                 />
-                <div
-                  onClick={() =>
-                    handleIncreasePrice(
-                      price,
-                      placeBetValues,
-                      dispatch,
-                      setPrice
-                    )
-                  }
-                  _ngcontent-ukj-c63=""
-                  class="input-group-append"
-                >
-                  <span _ngcontent-ukj-c63="" class="input-group-text">
-                    +
-                  </span>
-                </div>
+                {!placeBetValues?.isWeak && (
+                  <div
+                    onClick={() =>
+                      handleIncreasePrice(
+                        price,
+                        placeBetValues,
+                        dispatch,
+                        setPrice
+                      )
+                    }
+                    _ngcontent-ukj-c63=""
+                    class="input-group-append"
+                  >
+                    <span _ngcontent-ukj-c63="" class="input-group-text">
+                      +
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
             <div _ngcontent-ukj-c63="" class="col-6">
               <input
+                onChange={(e) => dispatch(setStake(e.target.value))}
                 _ngcontent-ukj-c63=""
                 type="number"
                 value={stake !== null && stake}
