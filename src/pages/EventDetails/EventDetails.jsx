@@ -11,7 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTv } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPredictOdd } from "../../redux/features/events/eventSlice";
+import {
+  setPredictOdd,
+  setStake,
+} from "../../redux/features/events/eventSlice";
 import Tab from "../../components/modules/EventDetails/Tab";
 import { useCurrentBets } from "../../hooks/currentBets";
 import CurrentBets from "../../components/modules/EventDetails/CurrentBets";
@@ -63,6 +66,12 @@ const EventDetails = () => {
   /* Place bet calculate */
   // console.log(placeBetValues);
   useEffect(() => {
+    if (placeBetValues?.totalSize) {
+      dispatch(setStake(parseFloat(placeBetValues?.totalSize)));
+    }
+  }, [placeBetValues, dispatch]);
+
+  useEffect(() => {
     if (
       placeBetValues?.btype === "MATCH_ODDS" ||
       placeBetValues?.btype === "BOOKMAKER"
@@ -77,6 +86,7 @@ const EventDetails = () => {
           const bookmaker = 1 + price / 100;
           total = bookmaker * stake - stake;
         }
+
         if (stake) {
           const currentExposure = placeBetValues?.exposure?.map((exp) => {
             return {
@@ -88,7 +98,7 @@ const EventDetails = () => {
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
             };
           });
-
+          console.log({ currentExposure });
           dispatch(setPredictOdd(currentExposure));
         }
       } else if (placeBetValues?.lay) {
