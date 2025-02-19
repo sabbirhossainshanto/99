@@ -348,7 +348,7 @@ const Fancy = ({ fancy }) => {
                                       pnlBySelection?.find(
                                         (pnl) => pnl?.MarketId === games?.id
                                       ) || {};
-                                    console.log(games);
+                                    // console.log(games);
                                     return (
                                       <div key={games?.id} _ngcontent-bym-c102>
                                         <div _ngcontent-bym-c102>
@@ -362,13 +362,13 @@ const Fancy = ({ fancy }) => {
                                                 games?.status ===
                                                 Status.SUSPENDED
                                                   ? "suspended"
-                                                  : "suspended"
+                                                  : ""
                                               } `}
                                               data-title={` ${
                                                 games?.status ===
                                                 Status.SUSPENDED
                                                   ? "suspended"
-                                                  : "suspended"
+                                                  : ""
                                               }`}
                                             >
                                               <div

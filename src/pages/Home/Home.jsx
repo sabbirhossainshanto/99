@@ -5,7 +5,7 @@ import Events from "../../components/modules/Home/Events";
 import Header from "../../components/modules/Home/Header";
 import HighLightThumbnails from "../../components/modules/Home/HighLightThumbnails";
 import HomeThumbnails from "../../components/modules/Home/HomeThumbnails";
-import NotUsing from "../../components/modules/Home/NotUsing";
+// import NotUsing from "../../components/modules/Home/NotUsing";
 import Tab from "../../components/modules/Home/Tab";
 
 const Home = () => {
@@ -52,7 +52,7 @@ const Home = () => {
               aria-labelledby
               className="tab-pane"
             />
-            <NotUsing />
+            {/* <NotUsing /> */}
           </div>
         </div>
         {homeTab === "inPlay" && <HighLightThumbnails />}

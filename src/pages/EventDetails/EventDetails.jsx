@@ -244,7 +244,7 @@ const EventDetails = () => {
     // value?.toFixed(2)
     return hasDecimal ? parseFloat(value?.toFixed(2)) : value;
   };
-  // console.log(data);
+
   return (
     <div _ngcontent-bym-c104 className="main-content">
       <div
@@ -342,9 +342,10 @@ const EventDetails = () => {
                       )}
 
                       <div _ngcontent-bym-c104>
-                        {eventTypeId == 4 && data?.result?.[0]?.score && (
-                          <Score score={data?.result?.[0]?.score} />
-                        )}
+                        {eventTypeId == 4 &&
+                          data?.result?.[0]?.score?.length > 0 && (
+                            <Score score={data?.result?.[0]?.score} />
+                          )}
 
                         <div _ngcontent-bym-c104 className="sr-widget-1" />
                         {matchOdds && matchOdds?.length > 0 && (
