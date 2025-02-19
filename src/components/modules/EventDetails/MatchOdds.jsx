@@ -57,7 +57,7 @@ const MatchOdds = ({ matchOdds }) => {
             updatedPnl.push({
               exposure: pnl?.pnl,
               id: pnl?.RunnerId,
-              isBettingOnThisRunner: rnr?.RunnerId === runner?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
             });
           } else {
             updatedPnl.push({
@@ -78,7 +78,7 @@ const MatchOdds = ({ matchOdds }) => {
             updatedPnl.push({
               exposure: pnl?.pnl,
               id: pnl?.RunnerId,
-              isBettingOnThisRunner: rnr?.RunnerId === runner?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
             });
           } else {
             updatedPnl.push({

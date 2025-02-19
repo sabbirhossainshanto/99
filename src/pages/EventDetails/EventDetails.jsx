@@ -61,7 +61,7 @@ const EventDetails = () => {
   }, [eventId, eventTypeId, getIFrame, showIFrame]);
 
   /* Place bet calculate */
-
+  // console.log(placeBetValues);
   useEffect(() => {
     if (
       placeBetValues?.btype === "MATCH_ODDS" ||
@@ -77,19 +77,18 @@ const EventDetails = () => {
           const bookmaker = 1 + price / 100;
           total = bookmaker * stake - stake;
         }
-
         if (stake) {
           const currentExposure = placeBetValues?.exposure?.map((exp) => {
             return {
               exposure: exp?.isBettingOnThisRunner
-                ? formatNumber(exp?.exposure + total)
-                : formatNumber(exp?.exposure - stake),
+                ? exp?.exposure + total
+                : exp?.exposure - stake,
 
               id: exp?.id,
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
             };
           });
-          console.log(currentExposure);
+
           dispatch(setPredictOdd(currentExposure));
         }
       } else if (placeBetValues?.lay) {
