@@ -83,7 +83,7 @@ const EventDetails = () => {
             return {
               exposure: exp?.isBettingOnThisRunner
                 ? formatNumber(exp?.exposure + total)
-                : formatNumber(exp?.exposure + stake),
+                : formatNumber(exp?.exposure - stake),
 
               id: exp?.id,
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
@@ -95,7 +95,8 @@ const EventDetails = () => {
       } else if (placeBetValues?.lay) {
         let total;
         if (placeBetValues?.btype === "MATCH_ODDS") {
-          total = -1 * (price * stake - stake);
+          // total = -1 * (price * stake - stake);
+          total = price * stake - stake;
         }
         if (placeBetValues?.btype === "BOOKMAKER") {
           const bookmaker = 1 + price / 100;
@@ -106,8 +107,8 @@ const EventDetails = () => {
           const currentExposure = placeBetValues?.exposure?.map((exp) => {
             return {
               exposure: exp?.isBettingOnThisRunner
-                ? formatNumber(exp?.exposure + total)
-                : formatNumber(exp?.exposure + stake),
+                ? formatNumber(exp?.exposure - stake)
+                : formatNumber(exp?.exposure + total),
               id: exp?.id,
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
             };
