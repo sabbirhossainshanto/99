@@ -65,7 +65,7 @@ const EventDetails = () => {
 
   useEffect(() => {
     if (placeBetValues?.totalSize) {
-      dispatch(setStake(parseFloat(placeBetValues?.totalSize)));
+      dispatch(setStake(placeBetValues?.totalSize?.toFixed(2)));
     }
   }, [placeBetValues, dispatch]);
 
