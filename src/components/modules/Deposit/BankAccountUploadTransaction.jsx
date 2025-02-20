@@ -34,7 +34,6 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
   }, [amount, getPaymentMethod]);
 
   const handleVisibleBankMethod = async (method) => {
-    console.log(method);
     setMethodType(method?.type);
     setPaymentId(method?.paymentId);
 
@@ -66,9 +65,9 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       };
 
       const res = await AxiosSecure.post(API.bankAccount, depositDetail);
-      console.log(res);
+
       const data = res?.data;
-      console.log(data);
+
       if (data?.success) {
         setDepositData(data?.result);
       }
@@ -103,8 +102,6 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
       .padStart(2, "0")}`;
   };
 
-  console.log(data);
-
   return (
     <div className="col-md-8">
       <div className="row">
@@ -131,7 +128,6 @@ const BankAccountUploadTransaction = ({ setTab, amount }) => {
                   }}
                 >
                   {data?.result?.map((method) => {
-                    console.log(method);
                     return (
                       <button
                         onClick={() => handleVisibleBankMethod(method)}

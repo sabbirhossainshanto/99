@@ -52,12 +52,12 @@ const Bookmaker = ({ bookmaker }) => {
         runnerId = games.runners.map((runner) => runner.id);
         eventTypeId = games?.eventTypeId;
         games?.runners?.forEach((rnr) => {
-          const pnl = pnlBySelection?.find((p) => p?.RunnerId === runner?.id);
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === rnr?.id);
           if (pnl) {
             updatedPnl.push({
               exposure: pnl?.pnl,
               id: pnl?.RunnerId,
-              isBettingOnThisRunner: rnr?.RunnerId === runner?.id,
+              isBettingOnThisRunner: rnr?.id === runner?.id,
             });
           } else {
             updatedPnl.push({
@@ -71,7 +71,7 @@ const Bookmaker = ({ bookmaker }) => {
         selectionId = runner?.selectionId;
         eventTypeId = games?.marketId;
         games?.runners?.forEach((rnr) => {
-          const pnl = pnlBySelection?.find((p) => p?.RunnerId === runner?.id);
+          const pnl = pnlBySelection?.find((p) => p?.RunnerId === rnr?.id);
           if (pnl) {
             updatedPnl.push({
               exposure: pnl?.pnl,

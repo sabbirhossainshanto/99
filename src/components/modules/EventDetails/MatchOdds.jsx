@@ -229,8 +229,6 @@ const MatchOdds = ({ matchOdds }) => {
     pnlBySelection = Object?.values(obj);
   }
 
-  // console.log(exposure);
-
   return (
     <>
       {showRule && <MarketRule setShowRule={setShowRule} />}
@@ -310,7 +308,6 @@ const MatchOdds = ({ matchOdds }) => {
                   </div>
                   <div _ngcontent-bym-c100 className="table-body">
                     {games?.runners?.map((runner) => {
-                      // console.log(runner);
                       const pnl = pnlBySelection?.find(
                         (pnl) => pnl?.RunnerId === runner?.id
                       );
