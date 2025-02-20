@@ -63,8 +63,6 @@ const EventDetails = () => {
     }
   }, [eventId, eventTypeId, getIFrame, showIFrame]);
 
-  /* Place bet calculate */
-  // console.log(placeBetValues);
   useEffect(() => {
     if (placeBetValues?.totalSize) {
       dispatch(setStake(parseFloat(placeBetValues?.totalSize)));
@@ -72,13 +70,12 @@ const EventDetails = () => {
   }, [placeBetValues, dispatch]);
 
   useEffect(() => {
+    let total;
     if (
       placeBetValues?.btype === "MATCH_ODDS" ||
       placeBetValues?.btype === "BOOKMAKER"
     ) {
       if (placeBetValues?.back) {
-        let total;
-
         if (placeBetValues?.btype === "MATCH_ODDS") {
           total = price * stake - stake;
         }
@@ -91,21 +88,19 @@ const EventDetails = () => {
           const currentExposure = placeBetValues?.exposure?.map((exp) => {
             return {
               exposure: exp?.isBettingOnThisRunner
-                ? exp?.exposure + total
-                : exp?.exposure - stake,
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(exp?.exposure + -1 * stake),
 
               id: exp?.id,
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
             };
           });
-          console.log({ currentExposure });
+
           dispatch(setPredictOdd(currentExposure));
         }
       } else if (placeBetValues?.lay) {
-        let total;
         if (placeBetValues?.btype === "MATCH_ODDS") {
-          // total = -1 * (price * stake - stake);
-          total = price * stake - stake;
+          total = -1 * (price * stake - stake);
         }
         if (placeBetValues?.btype === "BOOKMAKER") {
           const bookmaker = 1 + price / 100;
@@ -116,8 +111,8 @@ const EventDetails = () => {
           const currentExposure = placeBetValues?.exposure?.map((exp) => {
             return {
               exposure: exp?.isBettingOnThisRunner
-                ? formatNumber(exp?.exposure - stake)
-                : formatNumber(exp?.exposure + total),
+                ? formatNumber(exp?.exposure + total)
+                : formatNumber(1 * exp?.exposure + 1 * stake),
               id: exp?.id,
               isBettingOnThisRunner: exp?.isBettingOnThisRunner,
             };
@@ -128,10 +123,8 @@ const EventDetails = () => {
     }
   }, [price, stake, placeBetValues, dispatch]);
 
-  /* Format number */
   const formatNumber = (value) => {
     const hasDecimal = value % 1 !== 0;
-    // value?.toFixed(2)
     return hasDecimal ? parseFloat(value?.toFixed(2)) : value;
   };
 
